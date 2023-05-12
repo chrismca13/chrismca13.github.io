@@ -1,5 +1,4 @@
-# Chris McAllister
-##### Data Scientist
+# Data Scientist
 
 ### Projects:
 
