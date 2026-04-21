@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chris McAllister — Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&family=Newsreader:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1916;
+    --ink-muted: #6b6860;
+    --ink-faint: #a8a49e;
+    --paper: #f9f7f3;
+    --paper-warm: #f2ede5;
+    --paper-card: #ffffff;
+    --rule: #ddd9d1;
+    --accent: #2d5a8e;
+    --accent-light: #e8eef6;
+    --tag-bg: #eeeae3;
+    --serif: 'EB Garamond', Georgia, serif;
+    --news: 'Newsreader', Georgia, serif;
+    --mono: 'DM Mono', 'Courier New', monospace;
+    --max: 860px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--serif);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(249,247,243,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* LAYOUT */
+  main { padding-top: 56px; }
+  section { max-width: var(--max); margin: 0 auto; padding: 5rem 2rem; }
+  section + section { border-top: 1px solid var(--rule); }
+
+  /* HERO */
+  #hero {
+    padding-top: 7rem;
+    padding-bottom: 6rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: end;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--news);
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-weight: 300;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.4rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-secondary {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.4rem;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--ink-muted); }
+
+  .hero-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.5;
+  }
+  .hero-badge-ring {
+    width: 88px; height: 88px;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-badge-initials {
+    font-family: var(--news);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+  .hero-badge-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: var(--news);
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-body p + p { margin-top: 1rem; }
+  .about-body p { color: var(--ink-muted); font-size: 1rem; }
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .stat-item { border-top: 1px solid var(--rule); padding-top: 1rem; }
+  .stat-number {
+    font-family: var(--news);
+    font-size: 2.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 0; }
+  .project-card {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 1.5rem 2rem;
+    align-items: start;
+    padding: 2rem 0;
+    border-top: 1px solid var(--rule);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .project-card:last-child { border-bottom: 1px solid var(--rule); }
+  .project-num {
+    font-family: var(--news);
+    font-size: 2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .project-body { min-width: 0; }
+  .project-title {
+    font-family: var(--news);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 0.95rem;
+    color: var(--ink-muted);
+    line-height: 1.65;
+    margin-bottom: 0.9rem;
+  }
+  .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    background: var(--tag-bg);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .project-arrow {
+    font-size: 1.2rem;
+    color: var(--ink-faint);
+    padding-top: 4px;
+    transition: color 0.2s, transform 0.2s;
+    text-decoration: none;
+  }
+  .project-card:hover .project-arrow { color: var(--accent); transform: translate(2px,-2px); }
+  .project-card:hover .project-title { color: var(--accent); }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+  .skill-group { }
+  .skill-group-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .skill-list { list-style: none; }
+  .skill-list li {
+    font-size: 0.95rem;
+    color: var(--ink);
+    padding: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .skill-list li::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--ink-faint);
+    flex-shrink: 0;
+  }
+
+  /* CONTACT */
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-desc {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    line-height: 1.8;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--paper-card);
+  }
+  .contact-link:hover { border-color: var(--ink-muted); background: var(--paper-warm); }
+  .contact-link-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .contact-link-value {
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .contact-link-arrow { color: var(--ink-faint); font-size: 0.9rem; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem;
+    text-align: center;
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.22s; }
+  .delay-3 { animation-delay: 0.34s; }
+  .delay-4 { animation-delay: 0.46s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-badge { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .project-card { grid-template-columns: 48px 1fr auto; gap: 1rem; }
+    h1 { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">CM</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div>
+      <p class="hero-eyebrow fade-up">Data Scientist &amp; ML Engineer</p>
+      <h1 class="fade-up delay-1">Chris<br>McAllister<em>.</em></h1>
+      <p class="hero-desc fade-up delay-2">
+        I turn messy data into clear decisions — building models, pipelines,
+        and visualisations that make complex systems legible.
+      </p>
+      <div class="hero-ctas fade-up delay-3">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-badge fade-up delay-4">
+      <div class="hero-badge-ring">
+        <span class="hero-badge-initials">CM</span>
+      </div>
+      <span class="hero-badge-label">Berkeley, CA</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About Me</p>
+    <div class="about-grid">
+      <div class="about-body">
+        <h2>Bridging analysis<br>and action.</h2>
+        <p>
+          I'm a data scientist with a background in statistics and software engineering,
+          focused on building end-to-end ML systems — from exploratory analysis through
+          to deployed, monitored models in production.
+        </p>
+        <p>
+          My work sits at the intersection of rigorous statistical thinking and pragmatic
+          engineering. I care about reproducibility, interpretability, and making sure
+          results are actually used by the people who need them.
+        </p>
+        <p>
+          Currently open to full-time roles and freelance consulting in ML engineering,
+          applied research, and data strategy.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <span class="stat-number">5+</span>
+          <span class="stat-label">Years in data science</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">12</span>
+          <span class="stat-label">Production models shipped</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Industries served</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">M.S.</span>
+          <span class="stat-label">Statistics, UC Berkeley</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Selected Projects</p>
+    <h2>Work that speaks<br>for itself.</h2>
+    <div class="projects-list">
+
+      <a href="#" class="project-card">
+        <span class="project-num">01</span>
+        <div class="project-body">
+          <p class="project-title">Customer Churn Prediction Pipeline</p>
+          <p class="project-desc">
+            End-to-end ML pipeline for a SaaS company — feature engineering from raw
+            event logs, gradient-boosted classifier, SHAP-based explainability dashboard,
+            and weekly batch inference via Airflow. Reduced churn 18% in 6 months.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">XGBoost</span>
+            <span class="tag">Airflow</span>
+            <span class="tag">SHAP</span>
+            <span class="tag">PostgreSQL</span>
+          </div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+      <a href="#" class="project-card">
+        <span class="project-num">02</span>
+        <div class="project-body">
+          <p class="project-title">Time-Series Demand Forecasting</p>
+          <p class="project-desc">
+            Multi-horizon sales forecasting system for a retail chain spanning 200+
+            SKUs and 40 stores. Compared Prophet, LSTM, and N-BEATS architectures;
+            deployed the ensemble via FastAPI with automated retraining triggers.
+          </p>
+          <div class="project-tags">
+            <span class="tag">PyTorch</span>
+            <span class="tag">Prophet</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Docker</span>
+            <span class="tag">MLflow</span>
+          </div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+      <a href="#" class="project-card">
+        <span class="project-num">03</span>
+        <div class="project-body">
+          <p class="project-title">NLP Document Classification &amp; Clustering</p>
+          <p class="project-desc">
+            Built a document intelligence system for a legal-tech firm — sentence
+            transformers for embedding, hierarchical clustering to surface topic
+            structure, and a fine-tuned classifier achieving 94% accuracy on
+            contract clause categorisation.
+          </p>
+          <div class="project-tags">
+            <span class="tag">HuggingFace</span>
+            <span class="tag">FAISS</span>
+            <span class="tag">Sentence Transformers</span>
+            <span class="tag">Streamlit</span>
+          </div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+      <a href="#" class="project-card">
+        <span class="project-num">04</span>
+        <div class="project-body">
+          <p class="project-title">A/B Testing Framework &amp; Causal Inference Dashboard</p>
+          <p class="project-desc">
+            Designed a self-serve experimentation platform for a growth team —
+            Bayesian A/B testing engine, sequential testing with early stopping,
+            and an interactive Plotly dashboard for non-technical stakeholders
+            to interpret results without analyst support.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Bayesian Stats</span>
+            <span class="tag">Plotly Dash</span>
+            <span class="tag">PyMC</span>
+          </div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">Skills &amp; Tools</p>
+    <h2>The technical stack.</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <p class="skill-group-title">Languages</p>
+        <ul class="skill-list">
+          <li>Python</li>
+          <li>R</li>
+          <li>SQL</li>
+          <li>Bash / Shell</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">ML &amp; Statistics</p>
+        <ul class="skill-list">
+          <li>Scikit-learn</li>
+          <li>PyTorch / TensorFlow</li>
+          <li>XGBoost / LightGBM</li>
+          <li>HuggingFace Transformers</li>
+          <li>PyMC / Stan</li>
+          <li>Statsmodels</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">Data &amp; Pipelines</p>
+        <ul class="skill-list">
+          <li>Pandas / Polars</li>
+          <li>dbt</li>
+          <li>Apache Airflow</li>
+          <li>Spark (PySpark)</li>
+          <li>PostgreSQL / BigQuery</li>
+          <li>Snowflake</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">MLOps &amp; Infrastructure</p>
+        <ul class="skill-list">
+          <li>MLflow</li>
+          <li>Docker / Kubernetes</li>
+          <li>FastAPI</li>
+          <li>AWS (S3, SageMaker, Lambda)</li>
+          <li>GitHub Actions</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">Visualisation</p>
+        <ul class="skill-list">
+          <li>Plotly / Dash</li>
+          <li>Streamlit</li>
+          <li>Tableau</li>
+          <li>Matplotlib / Seaborn</li>
+          <li>D3.js (basic)</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">Practices</p>
+        <ul class="skill-list">
+          <li>Experimental design</li>
+          <li>Causal inference</li>
+          <li>Model interpretability</li>
+          <li>Time-series forecasting</li>
+          <li>NLP / text mining</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <div class="contact-inner">
+      <div>
+        <h2>Let's work<br>together.</h2>
+        <p class="contact-desc">
+          Whether you have a specific project in mind, want to talk through a data
+          challenge, or are exploring longer-term collaboration — I'd love to hear
+          from you. Response time is typically within 48 hours.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:chris@example.com" class="contact-link">
+          <div>
+            <p class="contact-link-label">Email</p>
+            <p class="contact-link-value">chris@example.com</p>
+          </div>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://linkedin.com/in/chrismcallister" target="_blank" class="contact-link">
+          <div>
+            <p class="contact-link-label">LinkedIn</p>
+            <p class="contact-link-value">linkedin.com/in/chrismcallister</p>
+          </div>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://github.com/chrismcallister" target="_blank" class="contact-link">
+          <div>
+            <p class="contact-link-label">GitHub</p>
+            <p class="contact-link-value">github.com/chrismcallister</p>
+          </div>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="#" class="contact-link">
+          <div>
+            <p class="contact-link-label">Résumé</p>
+            <p class="contact-link-value">Download PDF</p>
+          </div>
+          <span class="contact-link-arrow">↓</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Chris McAllister &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; Berkeley, CA</p>
+</footer>
+
+</body>
+</html>
