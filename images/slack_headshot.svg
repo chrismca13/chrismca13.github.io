@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0%" stop-color="#2d5a8e"/>
+      <stop offset="100%" stop-color="#6fb3d2"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" rx="56" fill="url(#g)" />
+  <g transform="translate(56,56)" fill="#fff" font-family="DM Mono, monospace" font-size="34" text-anchor="middle" dominant-baseline="middle">
+    <text y="2">CM</text>
+  </g>
+</svg>

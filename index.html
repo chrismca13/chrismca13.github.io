@@ -173,6 +173,31 @@
     text-transform: uppercase;
   }
 
+  /* Headshot (replaces hero-badge) */
+  .hero-headshot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 1;
+  }
+  .hero-headshot img {
+    width: 112px;
+    height: 112px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    display: block;
+    background: var(--paper-card);
+  }
+  .hero-headshot .hero-badge-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
   /* SECTION HEADERS */
   .section-label {
     font-family: var(--mono);
@@ -485,10 +510,8 @@
         <a href="#contact" class="btn-secondary">Get in Touch</a>
       </div>
     </div>
-    <div class="hero-badge fade-up delay-4">
-      <div class="hero-badge-ring">
-        <span class="hero-badge-initials">CM</span>
-      </div>
+    <div class="hero-headshot fade-up delay-4">
+      <img src="images/slack_headshot.png" alt="Chris McAllister headshot" loading="lazy" width="112" height="112">
       <span class="hero-badge-label">Berkeley, CA</span>
     </div>
   </section>
@@ -680,7 +703,7 @@
             <span class="blog-date">March 15, 2024</span>
             <span class="blog-category">Machine Learning</span>
           </div>
-          <p class="blog-title">I'm a Full Time Data Scientist. I Don't Bother with Neural Networks at Work.</p>
+          <p class="blog-title">Exploring Decision Boundaries Visually with Neural Nets, Trees, and Regressions</p>
           <p class="blog-excerpt">
             All data scientists should be familiar with Neural Networks, but I don't believe it's necessary for all to be experts. A practical comparison of classical ML models versus neural networks on a real classification task.
           </p>
