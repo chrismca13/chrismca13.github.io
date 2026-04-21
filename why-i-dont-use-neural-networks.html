@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm a Full Time Data Scientist. I Don't Bother with Neural Networks at Work — Chris McAllister</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&family=Newsreader:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1916;
+    --ink-muted: #6b6860;
+    --ink-faint: #a8a49e;
+    --paper: #f9f7f3;
+    --paper-warm: #f2ede5;
+    --paper-card: #ffffff;
+    --rule: #ddd9d1;
+    --accent: #2d5a8e;
+    --accent-light: #e8eef6;
+    --tag-bg: #eeeae3;
+    --serif: 'EB Garamond', Georgia, serif;
+    --news: 'Newsreader', Georgia, serif;
+    --mono: 'DM Mono', 'Courier New', monospace;
+    --max: 860px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--serif);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(249,247,243,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* LAYOUT */
+  main { padding-top: 56px; }
+  section { max-width: var(--max); margin: 0 auto; padding: 5rem 2rem; }
+
+  /* BLOG POST */
+  .post-header {
+    margin-bottom: 3rem;
+  }
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .post-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .post-category {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    background: var(--tag-bg);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .post-reading-time {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--news);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  .post-content {
+    max-width: 700px;
+  }
+  .post-content p {
+    margin-bottom: 1.5rem;
+    color: var(--ink-muted);
+  }
+  .post-content h2 {
+    font-family: var(--news);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .post-content h3 {
+    font-family: var(--news);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .post-content ul, .post-content ol {
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    color: var(--ink-muted);
+  }
+  .post-content li {
+    margin-bottom: 0.5rem;
+  }
+  .post-content code {
+    font-family: var(--mono);
+    background: var(--paper-warm);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+  .post-content pre {
+    background: var(--paper-warm);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+  .post-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--ink);
+  }
+
+  .back-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem;
+    text-align: center;
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 1.75rem; }
+    .post-content { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">CM</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#blog">Blog</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section>
+    <a href="index.html#blog" class="back-link">← Back to Blog</a>
+
+    <div class="post-header">
+      <div class="post-meta">
+        <span class="post-date">March 15, 2024</span>
+        <span class="post-category">Machine Learning</span>
+        <span class="post-reading-time">8 min read</span>
+      </div>
+      <h1>I'm a Full Time Data Scientist. I Don't Bother with Neural Networks at Work.</h1>
+    </div>
+
+    <div class="post-content">
+      <p>If you have ever interacted with ChatGPT, witnessed a self-driving car, or had to convince your parents that a Facebook post was actually just a deep fake created by their opposing political party, then you have been directly impacted by a Neural Network.</p>
+
+      <p>These innovative pieces of technology are taking center stage across data science, and their outputs are taking the front page of news outlets everywhere.</p>
+
+      <p>All data scientists should be familiar with Neural Networks, but I don't believe it's necessary for all data scientists to be experts.</p>
+
+      <p>Let's tackle the following in this article:</p>
+      <ul>
+        <li>Introduction to our task</li>
+        <li>Performance across classical machine learning models</li>
+        <li>Performance lift from Neural Networks</li>
+        <li>Conclusion</li>
+      </ul>
+
+      <h2>Introduction to our Task</h2>
+
+      <p>Our goal is to correctly classify a dataset with two columns where the target variable is either red or blue. In other words, we are trying to guess the color of the dots on the right, given the color of the dots on the left. The data follows a distinctive "moon-shaped" distribution.</p>
+
+      <p>Here's the code to create the training dataset and plot:</p>
+
+      <pre><code>import numpy as np
+import sklearn
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+# Generate a dataset and plot it
+np.random.seed(0)
+X, y = sklearn.datasets.make_moons(800, noise=0.20)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+
+# Plot the training set
+plt.scatter(X_train[:,0], X_train[:,1], s=40, c=y_train, cmap='bwr');
+plt.title('Scatter Plot of Training Set');</code></pre>
+
+      <h2>Performance Across Classical Machine Learning Models</h2>
+
+      <p>Now we're going to try to classify the test dataset using three classical machine learning models: a simple Logistic Regression, a simple Random Forest Classifier, and a more complex Random Forest Classifier.</p>
+
+      <h3>Logistic Regression</h3>
+
+      <p>The base logistic regression drew a linear decision boundary. For a lot of datasets, this would be perfectly fine, but given the unique non-linear "moon-shaped" distribution of the classes, we need other models to get better predictions.</p>
+
+      <p><strong>Accuracy: 85.0%</strong></p>
+
+      <pre><code>from sklearn import linear_model
+import sklearn
+from sklearn import datasets
+from sklearn import linear_model
+from sklearn.inspection import DecisionBoundaryDisplay
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Train model
+lr = sklearn.linear_model.LogisticRegressionCV()
+lr.fit(X_train, y_train)
+
+# Get Predictions
+pred_scores = lr.predict_proba(X_test)[:, 1]
+pred_classes = np.where(lr.predict_proba(X_test)[:, 1] >= .50, 1, 0)
+
+# Draw decision boundary
+disp = DecisionBoundaryDisplay.from_estimator(
+    lr, X_test, response_method="predict",
+    xlabel='Feature 1', ylabel='Feature 2',
+    alpha=0.2, cmap="bwr"
+)
+
+disp.ax_.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap="bwr")
+
+# Format chart title and print accuracy
+acc = accuracy_score(y_test, pred_classes, normalize=True)
+acc_message = 'Test Set Accuracy: ' + str(acc)
+
+plt.title('Logistic Regression Classifier - ' + acc_message)
+plt.show()</code></pre>
+
+      <h3>Simple Random Forest Classifier</h3>
+
+      <p>We could also use a Random Forest to predict our classes. The simple random forest with only 15 trees with a max depth of 2 yielded much better results. Note that the boundary lines are still linear, but the nature of the model allows us to more closely resemble the shape of our distribution by zig-zagging around the dots.</p>
+
+      <p><strong>Accuracy: 88.5%</strong></p>
+
+      <pre><code># Train Model
+rf = RandomForestClassifier(max_depth=2, random_state=0, n_estimators=15)
+rf.fit(X_train, y_train)
+
+# Get Predictions
+pred_scores = rf.predict_proba(X_test)[:, 1]
+pred_classes = np.where(rf.predict_proba(X_test)[:, 1] >= .50, 1, 0)</code></pre>
+
+      <h3>Complex Random Forest Classifier</h3>
+
+      <p>If we make a more complex Random Forest model, we can draw more nuanced lines that closely mimic the actual distribution of the test set. Note the jump in accuracy from the high eighties up to 95% with this version of a random forest.</p>
+
+      <p><strong>Accuracy: 95.0%</strong></p>
+
+      <pre><code># Train Model
+rf = RandomForestClassifier(max_depth=40, random_state=0, n_estimators=60)
+rf.fit(X_train, y_train)
+
+# Get Predictions
+pred_scores = rf.predict_proba(X_test)[:, 1]
+pred_classes = np.where(rf.predict_proba(X_test)[:, 1] >= .50, 1, 0)</code></pre>
+
+      <h2>Performance Lift from Neural Networks</h2>
+
+      <p>Lastly, let's use a Neural Network to classify the dots. This task is a good fit for a neural network given the non-linear nature of the moon-shaped dataset.</p>
+
+      <h3>Base Neural Network</h3>
+
+      <p>My base neural network yielded curved lines to classify the points, but we're still under-performing our complex random forest above.</p>
+
+      <p><strong>Accuracy: 92.8%</strong></p>
+
+      <pre><code>from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import Adam
+from keras.utils import to_categorical
+
+model = Sequential([
+    Dense(64, input_shape=(X_train.shape[1],), activation='relu'),  # First hidden layer
+    Dense(32, activation='relu'),  # Second hidden layer
+    Dense(2, activation='softmax')  # Output layer with 2 units for 2 classes
+])
+
+# Compile the model
+model.compile(optimizer=Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Train the model
+history = model.fit(X_train, y_train, epochs=20, batch_size=32, validation_data=(X_test, y_test))</code></pre>
+
+      <h3>Tuned Neural Network</h3>
+
+      <p>After making the following changes, I achieved much better results:</p>
+      <ul>
+        <li>Increased the number of hidden layers from 2 to 4</li>
+        <li>Increased the learning rate from 0.001 to 0.007</li>
+        <li>Reduced the number of training epochs from 20 to 7</li>
+      </ul>
+
+      <p>We ended up with a very specific curved decision boundary and improved accuracy.</p>
+
+      <p><strong>Accuracy: 95.7%</strong></p>
+
+      <pre><code>from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=0)
+
+# Ensure your labels are one-hot encoded
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
+
+# Added additional layer AND # of neurons per layer
+model = Sequential([
+    Dense(128, input_shape=(X_train.shape[1],), activation='relu'),
+    Dense(64, activation='relu'),
+    Dense(32, activation='relu'),
+    Dense(16, activation='relu'),
+    Dense(2, activation='softmax')  # Adjust output layer as needed
+])
+
+# Increased the learning rate (from 0.001 to 0.007)
+model.compile(optimizer=Adam(learning_rate=0.007), loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Decreased # of epochs to reduce the risk of the large learning rate over-shooting the minimum
+history = model.fit(X_train, y_train, epochs=7, batch_size=15, validation_data=(X_test, y_test))</code></pre>
+
+      <h2>Conclusion</h2>
+
+      <p>We started with a logistic regression with 85.0% accuracy, quickly jumped our accuracy up to 95.0% with a random forest, and lastly improved to 95.7% with a neural network.</p>
+
+      <p>While the neural network performed the best (and could perform even better if we took more time), it also was by far the most difficult to build. It takes a long time to train, and tuning the parameters was tedious. It also worked well with our small dataset of under 1,000 records, but increasing the size to something in the real world would take much longer.</p>
+
+      <p>My thought is that you can always go back and fine tune your models if your company has lots of time, but most data scientists are challenged to move quickly and don't have the luxury to spend years building a single model (or decades in the case of self-driving cars).</p>
+
+      <p>You can always start with a classical model (like XGBoost or Random Forest) before moving to something more complex like a neural network. Classical models are also much easier to explain to non-technical audiences, whose buy-in you'll need to deploy your model.</p>
+
+      <p><strong>The best models are the ones that drive action — not the ones that take a year to build only to fall flat when presenting to a non-technical stakeholder.</strong></p>
+
+      <p>There are lots of use cases that make sense for neural networks. While the lift was small in performance for this toy task, there are other tasks where the neural network would greatly outperform classical models. If this were an image classification task, I would start with neural networks and not even bother with other models.</p>
+
+      <p>Thanks for making it this far! Feel free to check out my <a href="https://github.com/chrismca13/NeuralNetwork_Explortation/tree/main">GitHub repository</a> or reach out on LinkedIn if you want to discuss further.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Chris McAllister &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; Berkeley, CA</p>
+</footer>
+
+</body>
+</html>
