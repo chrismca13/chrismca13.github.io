@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fine-tuning LLMs on Custom Data — Chris McAllister</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&family=Newsreader:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1916;
+    --ink-muted: #6b6860;
+    --ink-faint: #a8a49e;
+    --paper: #f9f7f3;
+    --paper-warm: #f2ede5;
+    --paper-card: #ffffff;
+    --rule: #ddd9d1;
+    --accent: #2d5a8e;
+    --accent-light: #e8eef6;
+    --tag-bg: #eeeae3;
+    --serif: 'EB Garamond', Georgia, serif;
+    --news: 'Newsreader', Georgia, serif;
+    --mono: 'DM Mono', 'Courier New', monospace;
+    --max: 860px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--serif);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(249,247,243,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* LAYOUT */
+  main { padding-top: 56px; }
+  section { max-width: var(--max); margin: 0 auto; padding: 5rem 2rem; }
+
+  /* BLOG POST */
+  .post-header {
+    margin-bottom: 3rem;
+  }
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .post-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .post-category {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    background: var(--tag-bg);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .post-reading-time {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--news);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  .post-content {
+    max-width: 700px;
+  }
+  .post-content p {
+    margin-bottom: 1.5rem;
+    color: var(--ink-muted);
+  }
+  .post-content h2 {
+    font-family: var(--news);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .post-content h3 {
+    font-family: var(--news);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .post-content ul, .post-content ol {
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    color: var(--ink-muted);
+  }
+  .post-content li {
+    margin-bottom: 0.5rem;
+  }
+  .post-content code {
+    font-family: var(--mono);
+    background: var(--paper-warm);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+  .post-content pre {
+    background: var(--paper-warm);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+  .post-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--ink);
+  }
+
+  .back-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem;
+    text-align: center;
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 1.75rem; }
+    .post-content { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">CM</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#blog">Blog</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section>
+    <a href="index.html#blog" class="back-link">← Back to Blog</a>
+
+    <div class="post-header">
+      <div class="post-meta">
+        <span class="post-date">March 28, 2026</span>
+        <span class="post-category">NLP</span>
+        <span class="post-reading-time">10 min read</span>
+      </div>
+      <h1>Fine-tuning Large Language Models on Custom Data: A Practical Walkthrough</h1>
+    </div>
+
+    <div class="post-content">
+      <p>
+        Large language models are impressive out of the box, but they're not designed for your specific problem. A general-purpose LLM trained on web text won't understand your domain jargon, corporate policies, or customer service tone. This is where fine-tuning comes in.
+      </p>
+
+      <p>
+        Fine-tuning adapts a pre-trained model to your data without training from scratch. It's faster, cheaper, and produces models that respect your domain. In this post, I'll walk through a practical example: fine-tuning Mistral 7B on customer support dialogues.
+      </p>
+
+      <h2>When to Fine-tune</h2>
+
+      <p>
+        Fine-tuning isn't always necessary. Consider your alternatives:
+      </p>
+
+      <ul>
+        <li><strong>Prompt engineering:</strong> Often solves the problem with no training. Try this first.</li>
+        <li><strong>Retrieval augmentation (RAG):</strong> Better for knowledge-grounded tasks (Q&amp;A, document search)</li>
+        <li><strong>Fine-tuning:</strong> When you need the model to adopt a style, follow specific protocols, or handle domain-specific tasks</li>
+      </ul>
+
+      <p>
+        For customer support, you want consistency and domain knowledge, so fine-tuning is justified.
+      </p>
+
+      <h2>Preparing Your Data</h2>
+
+      <p>
+        Quality over quantity. A few hundred high-quality examples beat thousands of mediocre ones. Your training data should be representative of your use case.
+      </p>
+
+      <p>
+        Format matters. Most modern frameworks use a simple JSON or conversational format:
+      </p>
+
+      <pre><code>{
+  "messages": [
+    {"role": "user", "content": "I can't reset my password"},
+    {"role": "assistant", "content": "I can help with that. Let me verify your account..."}
+  ]
+}</code></pre>
+
+      <p>
+        Create a dataset of 200-1000 examples. Split 80/20 into training and validation. Use validation loss to detect overfitting.
+      </p>
+
+      <h2>Fine-tuning with Hugging Face</h2>
+
+      <p>
+        The <code>transformers</code> library with LoRA (Low-Rank Adaptation) makes this accessible. LoRA freezes the base model and trains a small adapter—drastically reducing memory and computation.
+      </p>
+
+      <pre><code>from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, Trainer
+from peft import get_peft_model, LoraConfig, TaskType
+from datasets import load_dataset
+
+# Load model and tokenizer
+model_name = "mistralai/Mistral-7B"
+model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto")
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+# LoRA configuration
+lora_config = LoraConfig(
+    r=8,
+    lora_alpha=32,
+    target_modules=["q_proj", "v_proj"],
+    lora_dropout=0.05,
+    bias="none",
+    task_type=TaskType.CAUSAL_LM
+)
+
+# Apply LoRA
+model = get_peft_model(model, lora_config)
+
+# Load your dataset
+dataset = load_dataset("json", data_files="data.json")
+dataset = dataset.map(lambda x: tokenizer(x["text"], truncation=True), batched=True)
+
+# Training arguments
+training_args = TrainingArguments(
+    output_dir="./mistral-support",
+    num_train_epochs=3,
+    per_device_train_batch_size=4,
+    save_steps=10,
+    logging_steps=10,
+    learning_rate=2e-4,
+    warmup_steps=100,
+)
+
+# Train
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=dataset["train"],
+    eval_dataset=dataset["test"],
+)
+trainer.train()</code></pre>
+
+      <h2>Memory Optimization</h2>
+
+      <p>
+        Even with LoRA, fine-tuning can be memory-intensive. Use these tricks:
+      </p>
+
+      <ul>
+        <li><strong>Quantization:</strong> Load the model in 8-bit or 4-bit format (<code>load_in_8bit=True</code>)</li>
+        <li><strong>Gradient checkpointing:</strong> Trade compute for memory (<code>gradient_checkpointing=True</code>)</li>
+        <li><strong>Smaller batch size:</strong> 4 or even 1 per device</li>
+        <li><strong>Smaller models:</strong> Start with Mistral 7B or Llama 2 7B, not 70B</li>
+      </ul>
+
+      <h2>Evaluation &amp; Iteration</h2>
+
+      <p>
+        Don't just look at loss. Evaluate on your validation set qualitatively. Generate outputs and ask:
+      </p>
+
+      <ul>
+        <li>Does the response follow your desired tone?</li>
+        <li>Does it stay in-character (avoiding generic or off-topic answers)?</li>
+        <li>Are domain terms handled correctly?</li>
+      </ul>
+
+      <p>
+        If performance is poor, consider:
+      </p>
+
+      <ul>
+        <li>Collecting more training data</li>
+        <li>Adjusting hyperparameters (learning rate, LoRA rank)</li>
+        <li>Using a different base model</li>
+        <li>Combining fine-tuning with RAG for external knowledge</li>
+      </ul>
+
+      <h2>Deployment Considerations</h2>
+
+      <p>
+        Once satisfied with your fine-tuned model, save it and prepare for deployment:
+      </p>
+
+      <pre><code># Save LoRA weights (much smaller than full model)
+model.save_pretrained("./my-fine-tuned-lora")
+
+# For inference, merge LoRA and base model
+from peft import AutoPeftModelForCausalLM
+model = AutoPeftModelForCausalLM.from_pretrained("./my-fine-tuned-lora")
+merged = model.merge_and_unload()
+merged.save_pretrained("./final-model")</code></pre>
+
+      <p>
+        Deploy via text-generation-webui, vLLM, or HuggingFace Inference API. Monitor outputs and collect feedback to iteratively improve.
+      </p>
+
+      <h2>Closing Thoughts</h2>
+
+      <p>
+        Fine-tuning bridges the gap between general-purpose LLMs and your specific needs. With modern tools and techniques, it's more accessible than ever. Start small, evaluate rigorously, and iterate. Your custom model will thank you.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Chris McAllister &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; Berkeley, CA</p>
+</footer>
+
+</body>
+</html>

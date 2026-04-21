@@ -278,13 +278,80 @@
   .project-card:hover .project-arrow { color: var(--accent); transform: translate(2px,-2px); }
   .project-card:hover .project-title { color: var(--accent); }
 
+  /* BLOG */
+  .blog-list { display: flex; flex-direction: column; gap: 0; }
+  .blog-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    padding: 2rem 0;
+    border-top: 1px solid var(--rule);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .blog-card:last-child { border-bottom: 1px solid var(--rule); }
+  .blog-body { min-width: 0; }
+  .blog-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .blog-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .blog-category {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    background: var(--tag-bg);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .blog-title {
+    font-family: var(--news);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .blog-excerpt {
+    font-size: 0.95rem;
+    color: var(--ink-muted);
+    line-height: 1.65;
+    margin-bottom: 0.9rem;
+  }
+  .blog-reading-time {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .blog-arrow {
+    font-size: 1.2rem;
+    color: var(--ink-faint);
+    padding-top: 4px;
+    transition: color 0.2s, transform 0.2s;
+    text-decoration: none;
+  }
+  .blog-card:hover .blog-arrow { color: var(--accent); transform: translate(2px,-2px); }
+  .blog-card:hover .blog-title { color: var(--accent); }
+
   /* SKILLS */
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
   }
-  .skill-group { }
   .skill-group-title {
     font-family: var(--mono);
     font-size: 11px;
@@ -383,6 +450,7 @@
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
     .project-card { grid-template-columns: 48px 1fr auto; gap: 1rem; }
+    .blog-card { grid-template-columns: 1fr; gap: 1rem; }
     h1 { font-size: 2.4rem; }
   }
 </style>
@@ -395,6 +463,7 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -409,8 +478,8 @@
       <p class="hero-eyebrow fade-up">Data Scientist &amp; ML Engineer</p>
       <h1 class="fade-up delay-1">Chris<br>McAllister<em>.</em></h1>
       <p class="hero-desc fade-up delay-2">
-        I turn messy data into clear decisions — building models, pipelines,
-        and visualisations that make complex systems legible.
+        I turn messy business problems into clean, maintainable ML solutions<br>
+        that drive real impact and increase conversion. <br>
       </p>
       <div class="hero-ctas fade-up delay-3">
         <a href="#projects" class="btn-primary">View Projects</a>
@@ -430,20 +499,19 @@
     <p class="section-label">About Me</p>
     <div class="about-grid">
       <div class="about-body">
-        <h2>Bridging analysis<br>and action.</h2>
+        <h2>Model development<br>and deployment.</h2>
         <p>
-          I'm a data scientist with a background in statistics and software engineering,
-          focused on building end-to-end ML systems — from exploratory analysis through
+          I'm a data scientist with a background in economics and analytics,
+          focused on building end-to-end ML systems — from exploratory analysis
           to deployed, monitored models in production.
         </p>
         <p>
-          My work sits at the intersection of rigorous statistical thinking and pragmatic
+          My work sits at the intersection of rigorous statistical thinking, business acumen, and pragmatic
           engineering. I care about reproducibility, interpretability, and making sure
           results are actually used by the people who need them.
         </p>
         <p>
-          Currently open to full-time roles and freelance consulting in ML engineering,
-          applied research, and data strategy.
+          Currently open to full-time roles in data science and machine learning.
         </p>
       </div>
       <div class="about-stats">
@@ -551,6 +619,75 @@
           </div>
         </div>
         <span class="project-arrow">↗</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <p class="section-label">Blog</p>
+    <h2>Insights &amp; techniques.</h2>
+    <div class="blog-list">
+
+      <a href="blog1.html" class="blog-card">
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-date">April 18, 2026</span>
+            <span class="blog-category">MLOps</span>
+          </div>
+          <p class="blog-title">Building Reliable ML Pipelines: Lessons from Production Failures</p>
+          <p class="blog-excerpt">
+            A deep dive into common pitfalls when deploying ML systems at scale. We'll cover data drift detection, model monitoring, graceful degradation, and how to debug production issues before they impact users.
+          </p>
+          <span class="blog-reading-time">8 min read</span>
+        </div>
+        <span class="blog-arrow">↗</span>
+      </a>
+
+      <a href="blog2.html" class="blog-card">
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-date">April 10, 2026</span>
+            <span class="blog-category">Statistics</span>
+          </div>
+          <p class="blog-title">Beyond p-values: A Practical Guide to Bayesian A/B Testing</p>
+          <p class="blog-excerpt">
+            Traditional frequentist testing can be unintuitive. This post walks through Bayesian alternatives that give you probabilities you actually care about, with practical code examples using PyMC and arviz.
+          </p>
+          <span class="blog-reading-time">12 min read</span>
+        </div>
+        <span class="blog-arrow">↗</span>
+      </a>
+
+      <a href="blog3.html" class="blog-card">
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-date">March 28, 2026</span>
+            <span class="blog-category">NLP</span>
+          </div>
+          <p class="blog-title">Fine-tuning Large Language Models on Custom Data: A Practical Walkthrough</p>
+          <p class="blog-excerpt">
+            LLMs are powerful, but often need domain-specific adaptation. Learn how to efficiently fine-tune models like Mistral or Llama 2 on your own data, optimise memory usage, and evaluate the results rigorously.
+          </p>
+          <span class="blog-reading-time">10 min read</span>
+        </div>
+        <span class="blog-arrow">↗</span>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-date">March 15, 2026</span>
+            <span class="blog-category">Data Engineering</span>
+          </div>
+          <p class="blog-title">dbt + Python: Building a Modern Data Stack Without Leaving SQL</p>
+          <p class="blog-excerpt">
+            dbt revolutionised how teams think about data transformation. Explore how to combine dbt's power with Python for feature engineering, testing, and orchestration in a unified workflow.
+          </p>
+          <span class="blog-reading-time">7 min read</span>
+        </div>
+        <span class="blog-arrow">↗</span>
       </a>
 
     </div>

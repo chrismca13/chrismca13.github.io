@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond p-values: Bayesian A/B Testing — Chris McAllister</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&family=Newsreader:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1916;
+    --ink-muted: #6b6860;
+    --ink-faint: #a8a49e;
+    --paper: #f9f7f3;
+    --paper-warm: #f2ede5;
+    --paper-card: #ffffff;
+    --rule: #ddd9d1;
+    --accent: #2d5a8e;
+    --accent-light: #e8eef6;
+    --tag-bg: #eeeae3;
+    --serif: 'EB Garamond', Georgia, serif;
+    --news: 'Newsreader', Georgia, serif;
+    --mono: 'DM Mono', 'Courier New', monospace;
+    --max: 860px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--serif);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(249,247,243,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* LAYOUT */
+  main { padding-top: 56px; }
+  section { max-width: var(--max); margin: 0 auto; padding: 5rem 2rem; }
+
+  /* BLOG POST */
+  .post-header {
+    margin-bottom: 3rem;
+  }
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .post-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .post-category {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    background: var(--tag-bg);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .post-reading-time {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--news);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  .post-content {
+    max-width: 700px;
+  }
+  .post-content p {
+    margin-bottom: 1.5rem;
+    color: var(--ink-muted);
+  }
+  .post-content h2 {
+    font-family: var(--news);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .post-content h3 {
+    font-family: var(--news);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .post-content ul, .post-content ol {
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    color: var(--ink-muted);
+  }
+  .post-content li {
+    margin-bottom: 0.5rem;
+  }
+  .post-content code {
+    font-family: var(--mono);
+    background: var(--paper-warm);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+  .post-content pre {
+    background: var(--paper-warm);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+  .post-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--ink);
+  }
+
+  .back-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem;
+    text-align: center;
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 1.75rem; }
+    .post-content { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">CM</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#blog">Blog</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section>
+    <a href="index.html#blog" class="back-link">← Back to Blog</a>
+
+    <div class="post-header">
+      <div class="post-meta">
+        <span class="post-date">April 10, 2026</span>
+        <span class="post-category">Statistics</span>
+        <span class="post-reading-time">12 min read</span>
+      </div>
+      <h1>Beyond p-values: A Practical Guide to Bayesian A/B Testing</h1>
+    </div>
+
+    <div class="post-content">
+      <p>
+        For decades, frequentist A/B testing has reigned supreme in industry. You run an experiment, collect data, compute a p-value, and if it's below 0.05, you declare victory. Simple, reproducible, and widely understood.
+      </p>
+
+      <p>
+        But frequentist testing has a dark secret: the p-value doesn't answer the question you actually care about. You want to know: "What's the probability that variant B is truly better than A?" Instead, the p-value tells you: "What's the probability of observing this data if the null hypothesis is true?" These are not the same thing.
+      </p>
+
+      <p>
+        Enter Bayesian A/B testing. It's more intuitive, more flexible, and increasingly practical. Let's build some intuition and then get hands-on with code.
+      </p>
+
+      <h2>Why Bayesian?</h2>
+
+      <p>
+        The Bayesian framework lets you ask the right question: "Given the data I've observed, what's the probability that variant B is better?" This requires three ingredients:
+      </p>
+
+      <ul>
+        <li><strong>A prior:</strong> Your belief about the conversion rates before seeing data</li>
+        <li><strong>A likelihood:</strong> How likely the observed data is under different parameter values</li>
+        <li><strong>A posterior:</strong> Your updated belief after seeing data (via Bayes' rule)</li>
+      </ul>
+
+      <p>
+        The posterior distribution gives you everything: point estimates, credible intervals, and—crucially—the probability that variant B beats variant A.
+      </p>
+
+      <h2>Setting Up with PyMC</h2>
+
+      <p>
+        PyMC is a probabilistic programming library that makes Bayesian inference accessible. Here's a minimal example for binary outcomes (conversions):
+      </p>
+
+      <pre><code>import pymc as pm
+import arviz as az
+import numpy as np
+
+# Your data
+control_conversions = 45
+control_visitors = 1000
+treatment_conversions = 58
+treatment_visitors = 1000
+
+# Define the model
+with pm.Model() as model:
+    # Priors: Beta distributions (weakly informative)
+    p_control = pm.Beta('p_control', alpha=1, beta=1)
+    p_treatment = pm.Beta('p_treatment', alpha=1, beta=1)
+    
+    # Likelihood: Binomial distribution
+    obs_control = pm.Binomial('obs_control', n=control_visitors, 
+                              p=p_control, observed=control_conversions)
+    obs_treatment = pm.Binomial('obs_treatment', n=treatment_visitors, 
+                                p=p_treatment, observed=treatment_conversions)
+    
+    # Derived quantity: treatment effect
+    lift = pm.Deterministic('lift', (p_treatment - p_control) / p_control)
+    
+    # Sample from posterior
+    trace = pm.sample(2000, tune=1000, return_inferencedata=True)
+
+# Posterior analysis
+summary = az.summary(trace)
+print(summary)</code></pre>
+
+      <h2>Interpreting Results</h2>
+
+      <p>
+        Once you have the posterior samples, you can compute whatever you want:
+      </p>
+
+      <ul>
+        <li><strong>Probability treatment is better:</strong> <code>np.mean(trace.posterior['p_treatment'] > trace.posterior['p_control'])</code></li>
+        <li><strong>Credible interval for lift:</strong> Use <code>az.plot_forest(trace)</code> to visualize</li>
+        <li><strong>Risk of choosing treatment:</strong> Compute the probability of a negative outcome under different loss functions</li>
+      </ul>
+
+      <h2>Key Advantages</h2>
+
+      <h3>1. Valid Sequential Testing</h3>
+
+      <p>
+        With frequentist testing, checking your results early inflates the false positive rate. Bayesian methods don't suffer from this. You can peek at results whenever you want.
+      </p>
+
+      <h3>2. Flexible Priors</h3>
+
+      <p>
+        If you have historical data or domain knowledge, encode it in your prior. If variant A is known to convert at 10%, use a prior centered on 0.1. Frequentist methods ignore this information.
+      </p>
+
+      <h3>3. Intuitive Outputs</h3>
+
+      <p>
+        The posterior probability that B beats A is exactly what stakeholders care about. No more explaining why a p &lt; 0.05 doesn't mean there's a 95% chance your hypothesis is true.
+      </p>
+
+      <h3>4. Principled Decision Rules</h3>
+
+      <p>
+        Instead of arbitrary cutoffs (p &lt; 0.05), define your decision rule upfront: stop the experiment when the probability that treatment is better exceeds 95% OR the probability it's worse exceeds 95%.
+      </p>
+
+      <h2>A Real-World Example</h2>
+
+      <p>
+        Suppose you're testing a new checkout flow. You hypothesize it reduces cart abandonment. After 10,000 visitors to each variant:
+      </p>
+
+      <ul>
+        <li>Control: 1,200 completed purchases</li>
+        <li>Treatment: 1,280 completed purchases</li>
+      </ul>
+
+      <p>
+        A frequentist t-test gives p ≈ 0.07 (not significant!). But your Bayesian analysis shows: "There's a 94% probability the treatment is better, with an expected improvement of 0.65%." Now you have a decision to make informed by the actual posterior.
+      </p>
+
+      <h2>Common Pitfalls</h2>
+
+      <ul>
+        <li><strong>Choosing a prior carelessly:</strong> Priors matter. Use domain expertise or sensitivity analysis to check robustness.</li>
+        <li><strong>Forgetting the cost of Type II errors:</strong> Sometimes a false negative is worse than a false positive. Adjust your decision rule accordingly.</li>
+        <li><strong>Over-interpreting credible intervals:</strong> A 95% credible interval doesn't mean the true value is there with 95% probability—it's your subjective degree of belief.</li>
+      </ul>
+
+      <h2>Closing Thoughts</h2>
+
+      <p>
+        Bayesian A/B testing won't replace frequentist methods overnight (they're too entrenched), but it's the more honest framework for decision-making. Try it on your next experiment—you might be surprised how much clearer your results become.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Chris McAllister &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; Berkeley, CA</p>
+</footer>
+
+</body>
+</html>

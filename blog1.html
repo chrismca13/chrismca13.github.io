@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Reliable ML Pipelines — Chris McAllister</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&family=Newsreader:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1916;
+    --ink-muted: #6b6860;
+    --ink-faint: #a8a49e;
+    --paper: #f9f7f3;
+    --paper-warm: #f2ede5;
+    --paper-card: #ffffff;
+    --rule: #ddd9d1;
+    --accent: #2d5a8e;
+    --accent-light: #e8eef6;
+    --tag-bg: #eeeae3;
+    --serif: 'EB Garamond', Georgia, serif;
+    --news: 'Newsreader', Georgia, serif;
+    --mono: 'DM Mono', 'Courier New', monospace;
+    --max: 860px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--serif);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(249,247,243,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* LAYOUT */
+  main { padding-top: 56px; }
+  section { max-width: var(--max); margin: 0 auto; padding: 5rem 2rem; }
+
+  /* BLOG POST */
+  .post-header {
+    margin-bottom: 3rem;
+  }
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .post-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .post-category {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    background: var(--tag-bg);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .post-reading-time {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--news);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  .post-content {
+    max-width: 700px;
+  }
+  .post-content p {
+    margin-bottom: 1.5rem;
+    color: var(--ink-muted);
+  }
+  .post-content h2 {
+    font-family: var(--news);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .post-content h3 {
+    font-family: var(--news);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .post-content ul, .post-content ol {
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    color: var(--ink-muted);
+  }
+  .post-content li {
+    margin-bottom: 0.5rem;
+  }
+  .post-content code {
+    font-family: var(--mono);
+    background: var(--paper-warm);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+  .post-content pre {
+    background: var(--paper-warm);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+  .post-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--ink);
+  }
+
+  .back-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem;
+    text-align: center;
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 1.75rem; }
+    .post-content { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">CM</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#blog">Blog</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section>
+    <a href="index.html#blog" class="back-link">← Back to Blog</a>
+
+    <div class="post-header">
+      <div class="post-meta">
+        <span class="post-date">April 18, 2026</span>
+        <span class="post-category">MLOps</span>
+        <span class="post-reading-time">8 min read</span>
+      </div>
+      <h1>Building Reliable ML Pipelines: Lessons from Production Failures</h1>
+    </div>
+
+    <div class="post-content">
+      <p>
+        Machine learning systems are notoriously brittle. A model that performs beautifully in a Jupyter notebook can spectacularly fail in production, often silently, degrading predictions without alerting anyone. In this post, I'll share lessons learned from debugging production ML pipelines and concrete techniques to catch issues before they hurt users.
+      </p>
+
+      <h2>The Problem: Why ML Systems Fail</h2>
+
+      <p>
+        Unlike traditional software, ML systems can fail in ways that are invisible to standard monitoring. Your API returns a 200 status code. Your service uptime is 99.9%. And yet, your model is quietly making worse predictions.
+      </p>
+
+      <p>
+        The culprits are many: data drift (the data distribution has changed since training), model drift (the relationship between features and labels has shifted), data quality issues (missing values, duplicates, corrupted records), or simply a bug in your feature engineering logic that affects 1% of users.
+      </p>
+
+      <h2>Core Strategies for Reliability</h2>
+
+      <h3>1. Data Quality Monitoring</h3>
+
+      <p>
+        Before your model sees data, validate it rigorously. Build data quality checks at the pipeline entry point:
+      </p>
+
+      <ul>
+        <li>Missing value rates per column</li>
+        <li>Value distributions (are numeric columns in expected ranges?)</li>
+        <li>Categorical value counts (is a new category appearing?)</li>
+        <li>Duplicate records and schema validation</li>
+      </ul>
+
+      <p>
+        Tools like <code>Great Expectations</code> automate this. Set strict thresholds and alert when breached—better to skip a prediction than make a bad one.
+      </p>
+
+      <h3>2. Input Feature Monitoring</h3>
+
+      <p>
+        Even clean raw data can produce bad features. Log your computed features and monitor their distributions in production. Compare against training-time statistics using techniques like Wasserstein distance or KL divergence to detect drift.
+      </p>
+
+      <h3>3. Prediction Monitoring</h3>
+
+      <p>
+        Track prediction outputs in aggregate. Sudden shifts in prediction distribution (all users getting high scores when they used to get low ones) signal a problem. Monitoring code is as important as model code.
+      </p>
+
+      <h3>4. Graceful Degradation</h3>
+
+      <p>
+        When you detect issues, don't default to serving bad predictions. Build fallback strategies: return a baseline prediction, serve a cached historical result, or ask a human. Transparency beats silence every time.
+      </p>
+
+      <h2>Practical Example: A Churn Detection Pipeline</h2>
+
+      <p>
+        Consider a customer churn prediction model. In production, we'd set up:
+      </p>
+
+      <ul>
+        <li><strong>Raw data checks:</strong> Ensure customer IDs are valid, activity timestamps are recent</li>
+        <li><strong>Feature checks:</strong> Validate that computed features (e.g., days since last login) are in expected ranges</li>
+        <li><strong>Prediction checks:</strong> Alert if > 50% of customers suddenly score as high-churn risk</li>
+        <li><strong>Fallback:</strong> If data quality fails, serve the previous week's cached predictions</li>
+      </ul>
+
+      <h2>Tooling</h2>
+
+      <p>
+        You don't need expensive MLOps platforms for this. A solid foundation includes:
+      </p>
+
+      <ul>
+        <li><strong>Great Expectations:</strong> Data validation framework</li>
+        <li><strong>Evidently AI:</strong> Model and data monitoring</li>
+        <li><strong>Custom monitoring dashboards:</strong> Use Grafana or Plotly to visualize key metrics</li>
+        <li><strong>Logging:</strong> Capture inputs, features, and predictions to a data lake for retrospective analysis</li>
+      </ul>
+
+      <h2>Closing Thoughts</h2>
+
+      <p>
+        Reliable ML systems are built on three pillars: data quality, feature monitoring, and graceful failure modes. The best model in the world is useless if you can't trust it. Invest in observability early, and your future self will thank you.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Chris McAllister &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; Berkeley, CA</p>
+</footer>
+
+</body>
+</html>
