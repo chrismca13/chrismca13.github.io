@@ -82,11 +82,11 @@
   /* HERO */
   #hero {
     padding-top: 4rem;
-    padding-bottom:2rem;
+    padding-bottom:1rem;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 3rem;
-    align-items: end;
+    align-items: center;
   }
   .hero-eyebrow {
     font-family: var(--mono);
@@ -180,12 +180,13 @@
     align-items: center;
     gap: 0.5rem;
     opacity: 1;
+    transform: translateY(-80px)
   }
   .hero-headshot img {
     width: 80%;
-    max-width: 400px;
-    /*height: 112px;*/
+    max-width: 600px;
     height: auto;
+    max-height: 600px;
     object-fit: cover;
     border-radius: 50%;
     border: 1px solid var(--rule);
@@ -218,10 +219,15 @@
   }
 
   /* ABOUT */
+  #about {
+  padding-top: 3rem;    
+  padding-bottom: 3rem; 
+  margin-top: 0;        
+  }
   .about-grid {
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 3rem;
+    gap: 5rem;
     align-items: start;
   }
   .about-body p + p { margin-top: 1rem; }
@@ -545,7 +551,7 @@
           <span class="stat-label">Years in data science and analytics</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number">100+</span>
+          <span class="stat-number">120+</span>
           <span class="stat-label">Features created in AWS feature store</span>
         </div>
         <div class="stat-item">
@@ -559,84 +565,22 @@
   <!-- PROJECTS -->
   <section id="projects">
     <p class="section-label">Selected Projects</p>
-    <h2>Work that speaks<br>for itself.</h2>
+    <h2>Projects and Self Development</h2>
     <div class="projects-list">
 
-      <a href="#" class="project-card">
+      <a href="https://oakhockey.streamlit.app" class="project-card">
         <span class="project-num">01</span>
         <div class="project-body">
-          <p class="project-title">Customer Churn Prediction Pipeline</p>
+          <p class="project-title">Oakland Hockey Web Application</p>
           <p class="project-desc">
-            End-to-end ML pipeline for a SaaS company — feature engineering from raw
-            event logs, gradient-boosted classifier, SHAP-based explainability dashboard,
-            and weekly batch inference via Airflow. Reduced churn 18% in 6 months.
+            Automated stat tracking for my local hockey league. Tracks player stats going back 10-years. Stores data in AWS S3, and refreshes daily using GitHub Actions. 
           </p>
           <div class="project-tags">
             <span class="tag">Python</span>
-            <span class="tag">XGBoost</span>
-            <span class="tag">Airflow</span>
-            <span class="tag">SHAP</span>
-            <span class="tag">PostgreSQL</span>
-          </div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </a>
-
-      <a href="#" class="project-card">
-        <span class="project-num">02</span>
-        <div class="project-body">
-          <p class="project-title">Time-Series Demand Forecasting</p>
-          <p class="project-desc">
-            Multi-horizon sales forecasting system for a retail chain spanning 200+
-            SKUs and 40 stores. Compared Prophet, LSTM, and N-BEATS architectures;
-            deployed the ensemble via FastAPI with automated retraining triggers.
-          </p>
-          <div class="project-tags">
-            <span class="tag">PyTorch</span>
-            <span class="tag">Prophet</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">Docker</span>
-            <span class="tag">MLflow</span>
-          </div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </a>
-
-      <a href="#" class="project-card">
-        <span class="project-num">03</span>
-        <div class="project-body">
-          <p class="project-title">NLP Document Classification &amp; Clustering</p>
-          <p class="project-desc">
-            Built a document intelligence system for a legal-tech firm — sentence
-            transformers for embedding, hierarchical clustering to surface topic
-            structure, and a fine-tuned classifier achieving 94% accuracy on
-            contract clause categorisation.
-          </p>
-          <div class="project-tags">
-            <span class="tag">HuggingFace</span>
-            <span class="tag">FAISS</span>
-            <span class="tag">Sentence Transformers</span>
-            <span class="tag">Streamlit</span>
-          </div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </a>
-
-      <a href="#" class="project-card">
-        <span class="project-num">04</span>
-        <div class="project-body">
-          <p class="project-title">A/B Testing Framework &amp; Causal Inference Dashboard</p>
-          <p class="project-desc">
-            Designed a self-serve experimentation platform for a growth team —
-            Bayesian A/B testing engine, sequential testing with early stopping,
-            and an interactive Plotly dashboard for non-technical stakeholders
-            to interpret results without analyst support.
-          </p>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Bayesian Stats</span>
-            <span class="tag">Plotly Dash</span>
-            <span class="tag">PyMC</span>
+            <span class="tag">AWS</span>
+            <span class="tag">S3</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">Pandas</span>
           </div>
         </div>
         <span class="project-arrow">↗</span>
@@ -650,52 +594,7 @@
     <p class="section-label">Blog</p>
     <h2>Insights &amp; techniques.</h2>
     <div class="blog-list">
-
-      <a href="building-reliable-ml-pipelines.html" class="blog-card">
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="blog-date">April 18, 2026</span>
-            <span class="blog-category">MLOps</span>
-          </div>
-          <p class="blog-title">Building Reliable ML Pipelines: Lessons from Production Failures</p>
-          <p class="blog-excerpt">
-            A deep dive into common pitfalls when deploying ML systems at scale. We'll cover data drift detection, model monitoring, graceful degradation, and how to debug production issues before they impact users.
-          </p>
-          <span class="blog-reading-time">8 min read</span>
-        </div>
-        <span class="blog-arrow">↗</span>
-      </a>
-
-      <a href="bayesian-ab-testing.html" class="blog-card">
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="blog-date">April 10, 2026</span>
-            <span class="blog-category">Statistics</span>
-          </div>
-          <p class="blog-title">Beyond p-values: A Practical Guide to Bayesian A/B Testing</p>
-          <p class="blog-excerpt">
-            Traditional frequentist testing can be unintuitive. This post walks through Bayesian alternatives that give you probabilities you actually care about, with practical code examples using PyMC and arviz.
-          </p>
-          <span class="blog-reading-time">12 min read</span>
-        </div>
-        <span class="blog-arrow">↗</span>
-      </a>
-
-      <a href="fine-tuning-llms.html" class="blog-card">
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="blog-date">March 28, 2026</span>
-            <span class="blog-category">NLP</span>
-          </div>
-          <p class="blog-title">Fine-tuning Large Language Models on Custom Data: A Practical Walkthrough</p>
-          <p class="blog-excerpt">
-            LLMs are powerful, but often need domain-specific adaptation. Learn how to efficiently fine-tune models like Mistral or Llama 2 on your own data, optimise memory usage, and evaluate the results rigorously.
-          </p>
-          <span class="blog-reading-time">10 min read</span>
-        </div>
-        <span class="blog-arrow">↗</span>
-      </a>
-
+     
       <a href="why-i-dont-use-neural-networks.html" class="blog-card">
         <div class="blog-body">
           <div class="blog-meta">
@@ -723,7 +622,6 @@
         <p class="skill-group-title">Languages</p>
         <ul class="skill-list">
           <li>Python</li>
-          <li>R</li>
           <li>SQL</li>
           <li>Bash / Shell</li>
         </ul>
@@ -732,10 +630,8 @@
         <p class="skill-group-title">ML &amp; Statistics</p>
         <ul class="skill-list">
           <li>Scikit-learn</li>
-          <li>PyTorch / TensorFlow</li>
           <li>XGBoost / LightGBM</li>
           <li>HuggingFace Transformers</li>
-          <li>PyMC / Stan</li>
           <li>Statsmodels</li>
         </ul>
       </div>
@@ -743,19 +639,14 @@
         <p class="skill-group-title">Data &amp; Pipelines</p>
         <ul class="skill-list">
           <li>Pandas / Polars</li>
-          <li>dbt</li>
-          <li>Apache Airflow</li>
           <li>Spark (PySpark)</li>
-          <li>PostgreSQL / BigQuery</li>
-          <li>Snowflake</li>
+          <li>PostgreSQL / Redshift / Athena</li>
         </ul>
       </div>
       <div class="skill-group">
         <p class="skill-group-title">MLOps &amp; Infrastructure</p>
         <ul class="skill-list">
           <li>MLflow</li>
-          <li>Docker / Kubernetes</li>
-          <li>FastAPI</li>
           <li>AWS (S3, SageMaker, Lambda)</li>
           <li>GitHub Actions</li>
         </ul>
@@ -763,11 +654,11 @@
       <div class="skill-group">
         <p class="skill-group-title">Visualisation</p>
         <ul class="skill-list">
-          <li>Plotly / Dash</li>
-          <li>Streamlit</li>
+          <li>Tableau / Power BI</li>
+          <li>Altair / Matplotlib</li>
           <li>Tableau</li>
-          <li>Matplotlib / Seaborn</li>
-          <li>D3.js (basic)</li>
+          <li>Streamlit</li>
+
         </ul>
       </div>
       <div class="skill-group">
@@ -775,7 +666,6 @@
         <ul class="skill-list">
           <li>Experimental design</li>
           <li>Causal inference</li>
-          <li>Model interpretability</li>
           <li>Time-series forecasting</li>
           <li>NLP / text mining</li>
         </ul>
