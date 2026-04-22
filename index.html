@@ -37,7 +37,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* NAV */
+  /* NAV (top bar of the page)*/ 
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -81,10 +81,10 @@
 
   /* HERO */
   #hero {
-    padding-top: 7rem;
-    padding-bottom: 6rem;
+    padding-top: 4rem;
+    padding-bottom:2rem;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 2fr 1fr;
     gap: 3rem;
     align-items: end;
   }
@@ -182,8 +182,10 @@
     opacity: 1;
   }
   .hero-headshot img {
-    width: 112px;
-    height: 112px;
+    width: 80%;
+    max-width: 400px;
+    /*height: 112px;*/
+    height: auto;
     object-fit: cover;
     border-radius: 50%;
     border: 1px solid var(--rule);
@@ -219,7 +221,7 @@
   .about-grid {
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 4rem;
+    gap: 3rem;
     align-items: start;
   }
   .about-body p + p { margin-top: 1rem; }
@@ -500,10 +502,11 @@
   <!-- HERO -->
   <section id="hero">
     <div>
-      <p class="hero-eyebrow fade-up">Data Scientist &amp; Machine Learning Engineer</p>
-      <h1 class="fade-up delay-1">Chris McAllister<em>.</em></h1>
+      <p class="hero-eyebrow fade-up">Data Scientist &amp; Machine Learning Engineer </p>
+      <h1 class="fade-up delay-1">Chris McAllister</h1>
       <p class="hero-desc fade-up delay-2">
-        I turn messy business problems into practical, maintainable machine learning solutions<br>
+        I turn messy business problems into practical, maintainable machine learning solutions.<br>
+        Currently a Senior Data Scientist at Rocket Mortgage, with a decade of experience in analytics, model development, and deployment. 
       </p>
       <div class="hero-ctas fade-up delay-3">
         <a href="#projects" class="btn-primary">View Projects</a>
@@ -538,7 +541,7 @@
       </div>
       <div class="about-stats">
         <div class="stat-item">
-          <span class="stat-number">8</span>
+          <span class="stat-number">10</span>
           <span class="stat-label">Years in data science and analytics</span>
         </div>
         <div class="stat-item">
@@ -548,10 +551,6 @@
         <div class="stat-item">
           <span class="stat-number">1</span>
           <span class="stat-label">AWS credential (and counting!)</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">M.S.</span>
-          <span class="stat-label">Data Science, University of Michigan</span>
         </div>
       </div>
     </div>
