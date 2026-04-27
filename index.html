@@ -76,7 +76,7 @@
 
   /* LAYOUT */
   main { padding-top: 56px; }
-  section { max-width: var(--max); margin: 0 auto; padding: 5rem 2rem; }
+  section { max-width: var(--max); margin: 0 auto; padding: 3rem 2rem; }
   section + section { border-top: 1px solid var(--rule); }
 
   /* HERO */
@@ -215,13 +215,13 @@
     font-size: 2rem;
     font-weight: 300;
     line-height: 1.2;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
   }
 
   /* ABOUT */
   #about {
   padding-top: 3rem;    
-  padding-bottom: 3rem; 
+  padding-bottom: 2rem; 
   margin-top: 0;        
   }
   .about-grid {
@@ -256,6 +256,15 @@
 
   /* PROJECTS */
   .projects-list { display: flex; flex-direction: column; gap: 0; }
+  /* Projects + blog combined grid layout */
+  .combined-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* single column: stack projects vertically */
+    gap: 2rem;
+    align-items: start;
+    padding: 0 0.5rem; /* keep content off the viewport edge */
+  }
+  .column { padding: 0; }
   .project-card {
     display: grid;
     grid-template-columns: 80px 1fr auto;
@@ -289,6 +298,7 @@
     font-size: 0.95rem;
     color: var(--ink-muted);
     line-height: 1.65;
+    margin-top: 0;
     margin-bottom: 0.9rem;
   }
   .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
@@ -496,7 +506,6 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#blog">Blog</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -524,99 +533,66 @@
       <span class="hero-badge-label">Berkeley, CA</span>
     </div>
   </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <p class="section-label">About Me</p>
-    <div class="about-grid">
-      <div class="about-body">
-        <h2>Model development<br>and deployment.</h2>
-        <p>
-          I'm a data scientist with a background in economics and analytics,
-          focused on building end-to-end ML systems — from exploratory analysis
-          to deployed, monitored models in production.
-        </p>
-        <p>
-          My work sits at the intersection of rigorous statistical thinking, business acumen, and pragmatic
-          engineering. I care about reproducibility, interpretability, and making sure
-          results are actually used by the people who need them.
-        </p>
-        <p>
-          Currently open to full-time roles in data science and machine learning.
-        </p>
-      </div>
-      <div class="about-stats">
-        <div class="stat-item">
-          <span class="stat-number">10</span>
-          <span class="stat-label">Years in data science and analytics</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">120+</span>
-          <span class="stat-label">Features created in AWS feature store</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">1</span>
-          <span class="stat-label">AWS credential (and counting!)</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
+  
   <section id="projects">
-    <p class="section-label">Selected Projects</p>
+    <p class="section-label">Projects & Writing</p>
     <h2>Projects and Self Development</h2>
-    <div class="projects-list">
-
-      <a href="https://oakhockey.streamlit.app" class="project-card">
-        <span class="project-num">01</span>
-        <div class="project-body">
-          <p class="project-title">Oakland Hockey Web Application</p>
-          <p class="project-desc">
-            Automated stat tracking for my local hockey league. Tracks player stats going back 10-years. Stores data in AWS S3, and refreshes daily using GitHub Actions. 
-          </p>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">AWS</span>
-            <span class="tag">S3</span>
-            <span class="tag">GitHub Actions</span>
-            <span class="tag">Pandas</span>
-          </div>
+    
+    <div class="combined-grid">
+      
+      <div class="column">
+        <div class="projects-list">
+          <a href="https://oakhockey.streamlit.app" class="project-card">
+            <span class="project-num">01</span>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span class="blog-date">December 2025</span>
+                <span class="blog-category">AWS</span>
+                <span class="blog-category">GitHub Actions</span>
+                <span class="blog-category">Streamlit</span>
+                <span class="blog-category">Python</span>
+              </div>
+              <p class="blog-title">Oakland Hockey Web Application</p>
+              <p class="blog-excerpt">
+                Automated stat tracking for my local hockey league. Stores data in AWS S3 and refreshes daily using GitHub Actions.
+              </p>
+              <span class="blog-reading-time">Live app</span>
+            </div>
+            <span class="project-arrow">↗</span>
+          </a>
         </div>
-        <span class="project-arrow">↗</span>
-      </a>
+      </div>
+
+      <div class="column">
+        <div class="projects-list">
+          <a href="decision-boundaries.html" class="project-card">
+            <span class="project-num">02</span>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span class="blog-date">March 2024</span>
+                <span class="blog-category">Machine Learning</span>
+                <span class="blog-category">Data Visualization</span>
+                <span class="blog-category">Supervised Learning</span>
+              </div>
+              <p class="blog-title">Exploring Decision Boundaries Visually with Neural Nets, Trees, and Regressors</p>
+              <p class="blog-excerpt">
+                A practical comparison of classical ML models versus neural networks on a real classification task.
+              </p>
+              <span class="blog-reading-time">8 min read</span>
+            </div>
+            <span class="blog-arrow">↗</span>
+          </a>
+        </div>
+      </div>
 
     </div>
   </section>
 
-  <!-- BLOG -->
-  <section id="blog">
-    <p class="section-label">Blog</p>
-    <h2>Insights &amp; techniques.</h2>
-    <div class="blog-list">
-     
-      <a href="decision-boundaries.html" class="blog-card">
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="blog-date">March 15, 2024</span>
-            <span class="blog-category">Machine Learning</span>
-          </div>
-          <p class="blog-title">Exploring Decision Boundaries Visually with Neural Nets, Trees, and Regressors</p>
-          <p class="blog-excerpt">
-            All data scientists should be familiar with Neural Networks, but I don't believe it's necessary for all to be experts. A practical comparison of classical ML models versus neural networks on a real classification task.
-          </p>
-          <span class="blog-reading-time">8 min read</span>
-        </div>
-        <span class="blog-arrow">↗</span>
-      </a>
-
-    </div>
-  </section>
 
   <!-- SKILLS -->
   <section id="skills">
     <p class="section-label">Skills &amp; Tools</p>
-    <h2>The technical stack.</h2>
+    <h2>Technical stack.</h2>
     <div class="skills-grid">
       <div class="skill-group">
         <p class="skill-group-title">Languages</p>
@@ -687,17 +663,17 @@
         </p>
       </div>
       <div class="contact-links">
-        <a href="mailto:chrismca@umich.edu.com" class="contact-link">
+        <a href="mailto:chrismca@umich.edu" class="contact-link">
           <div>
             <p class="contact-link-label">Email</p>
-            <p class="contact-link-value">chrismca@umich.edu.com</p>
+            <p class="contact-link-value">chrismca@umich.edu</p>
           </div>
           <span class="contact-link-arrow">↗</span>
         </a>
         <a href="https://www.linkedin.com/in/chris-mcallister-b7597710b/" target="_blank" class="contact-link">
           <div>
             <p class="contact-link-label">LinkedIn</p>
-            <p class="contact-link-value">linkedin.com/in/chrismcallister</p>
+            <p class="contact-link-value">linkedin.com/in/chris-mcallister-b7597710b/</p>
           </div>
           <span class="contact-link-arrow">↗</span>
         </a>
