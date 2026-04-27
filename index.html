@@ -237,6 +237,8 @@
     flex-direction: column;
     gap: 1.5rem;
   }
+  /* lift the stats column to align visually with the section title */
+  .about-stats { margin-top: -1.25rem; }
   .stat-item { border-top: 1px solid var(--rule); padding-top: 1rem; }
   .stat-number {
     font-family: var(--news);
@@ -491,6 +493,7 @@
     #hero { grid-template-columns: 1fr; }
     .hero-badge { display: none; }
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-stats { margin-top: 0; }
     .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
     .project-card { grid-template-columns: 48px 1fr auto; gap: 1rem; }
     .blog-card { grid-template-columns: 1fr; gap: 1rem; }
@@ -534,6 +537,42 @@
     </div>
   </section>
   
+  <section id="about">
+    <p class="section-label">About</p>
+    <h2>About me</h2>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>
+          I'm a data scientist with a background in economics and analytics, focused on building end-to-end ML systems — from exploratory analysis to deployed, monitored models in production.
+        </p>
+        <p>
+          My work sits at the intersection of rigorous statistical thinking, business acumen, and pragmatic engineering. I care about reproducibility, interpretability, and making sure results are actually used by the people who need them.
+        </p>
+
+        <p> I did my undergrad at the University of Michigan, where I studied Economics with minors in Math and Religion. I also graduated with a Masters degree in Data Science from Michigan's School of Information, where I was invited to serve part time as a teach in the program. </p>
+        <p>
+          Currently open to full-time roles in data science and machine learning.
+        </p>
+      </div>
+      <aside>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-number">9</span>
+            <span class="stat-label">Years in data science and analytics</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100+</span>
+            <span class="stat-label">Features developed in our AWS feature store</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">1</span>
+            <span class="stat-label">AWS Certification (and counting!)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
   <section id="projects">
     <p class="section-label">Projects & Writing</p>
     <h2>Projects and Self Development</h2>
