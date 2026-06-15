@@ -1,0 +1,3 @@
+---
+BUNDLE_BUILD__EVENTMACHINE: "--with-cflags=-Wno-error=implicit-function-declaration"
+BUNDLE_WITHOUT: "jekyll_plugins"
