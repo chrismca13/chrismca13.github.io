@@ -38,7 +38,27 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
+/* BACK TO BLOG BUTTON */
+.back-btn-container {
+  margin-bottom: 2rem;
+}
 
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent); /* Uses your site's accent color */
+  text-decoration: none;
+  font-family: var(--news);
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+  transform: translateX(-4px); /* Subtle nudge to the left on hover */
+}
 main {
   max-width: var(--max);
   margin: 0 auto;
@@ -209,7 +229,9 @@ main h3 a:hover {
 </header>
 
   <main>
-    <!-- This is where Jekyll will inject your actual content -->
+    <div class="back-btn-container">
+      <a href="/" class="back-btn">← Back to Portfolio</a>
+    </div>
     {{ content }}
   </main>
 
