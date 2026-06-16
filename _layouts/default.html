@@ -3,26 +3,163 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chris McAllister | Portfolio</title>
-  <link rel="stylesheet" href="/css/style.css"> 
-<!-- </head>
+  <title>Chris McAllister — Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&family=Newsreader:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       1. YOUR ORIGINAL BASE STYLES & VARIABLES
+       ========================================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1916;
+      --ink-muted: #6b6860;
+      --ink-faint: #a8a49e;
+      --paper: #f9f7f3;
+      --paper-warm: #f2ede5;
+      --paper-card: #ffffff;
+      --rule: #ddd9d1;
+      --accent: #2d5a8e;
+      --accent-light: #e8eef6;
+      --tag-bg: #eeeae3;
+      --serif: 'EB Garamond', Georgia, serif;
+      --news: 'Newsreader', Georgia, serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+      --max: 860px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* [Keep any other original styling rules you had here for your sections, body, typography, etc.] */
+
+
+    /* ==========================================================================
+       2. NEW GLOBAL HEADER & FOOTER STYLES
+       ========================================================================== */
+    .site-header {
+      width: 100%;
+      background-color: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1.25rem 0;
+    }
+
+    .header-container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .header-nav a {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .header-nav a:hover {
+      color: var(--accent);
+    }
+
+    .site-footer {
+      width: 100%;
+      background-color: var(--paper-warm);
+      border-top: 1px solid var(--rule);
+      padding: 3rem 0;
+      margin-top: 5rem;
+    }
+
+    .footer-container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-family: var(--news);
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+    }
+
+    .footer-links a {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      text-decoration: none;
+      margin-left: 1.25rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .header-container, .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+      .header-nav a {
+        margin: 0 0.75rem;
+      }
+      .footer-links a {
+        margin: 0 0.5rem;
+      }
+    }
+  </style>
+</head>
 <body>
 
-  <header>
-    <nav>
-      <a href="/">Home</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
+<header class="site-header">
+  <div class="header-container">
+    <a href="/" class="header-logo">Chris McAllister</a>
+    <nav class="header-nav">
+      <a href="/#about">About</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#skills">Skills</a>
+      <a href="/#contact">Contact</a>
     </nav>
-  </header> -->
+  </div>
+</header>
 
   <main>
+    <!-- This is where Jekyll will inject your actual content -->
     {{ content }}
   </main>
 
-  <footer>
-    <p>&copy; 2026 Chris McAllister</p>
-  </footer>
+<footer class="site-footer">
+  <div class="footer-container">
+    <p class="footer-copy">&copy; 2026 Chris McAllister. Built cleanly with Jekyll.</p>
+    <div class="footer-links">
+      <a href="https://github.com/chrismca13" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/chris-mcallister-b7597710b/" target="_blank">LinkedIn</a>
+      <a href="mailto:chrismca13@gmail.com">Email</a>
+    </nav>
+  </div>
+</footer>
 
 </body>
 </html>
