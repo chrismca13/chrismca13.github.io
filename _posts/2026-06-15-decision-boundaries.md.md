@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: "Visualizing Support Vector Machine Decision Boundaries"
 description: "A deep dive into hyperplanes, kernel tricks, and optimization using Scikit-Learn."
 ---
