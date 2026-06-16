@@ -23,15 +23,9 @@ My focus areas include:
 ## Selected Projects
 
 {% for post in site.posts %}
-### [{% if post.title %}{{ post.title }}{% else %}Project Title{% endif %}]({{ post.url }})
+### [{{ post.title }}]({{ post.url }})
 {{ post.description }}
 {% endfor %}
-
-### [Project Title 1](/decision-boundaries.html)
-A brief description of your project, the dataset used, and what you achieved. Built with Python and Scikit-Learn.
-    
-### [Project Title 2](/another-project.html)
-Another project summary detailing your specific role, engineering hurdles, and data insights.
 
 ---
 
