@@ -1,3 +1,7 @@
+---
+layout: null
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -573,57 +577,39 @@
     </div>
   </section>
 
+  <!-- PROJECTS -->
   <section id="projects">
     <p class="section-label">Projects & Writing</p>
     <h2>Projects and Self Development</h2>
     
     <div class="combined-grid">
-      
       <div class="column">
         <div class="projects-list">
-          <a href="https://oakhockey.streamlit.app" class="project-card">
-            <span class="project-num">01</span>
+          
+          {% assign sorted_posts = site.posts | sort: 'date' %}
+          {% for post in sorted_posts reversed %}
+          <!-- DYNAMIC CARD -->
+          <a href="{% if post.external_url %}{{ post.external_url }}{% else %}{{ post.url }}{% endif %}" class="project-card" {% if post.external_url %}target="_blank"{% endif %}>
+            <span class="project-num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
             <div class="blog-body">
               <div class="blog-meta">
-                <span class="blog-date">December 2025</span>
-                <span class="blog-category">AWS</span>
-                <span class="blog-category">GitHub Actions</span>
-                <span class="blog-category">Streamlit</span>
-                <span class="blog-category">Python</span>
+                <span class="blog-date">{{ post.date | date: "%B %Y" }}</span>
+                {% for category in post.categories %}
+                <span class="blog-category">{{ category }}</span>
+                {% endfor %}
               </div>
-              <p class="blog-title">Oakland Hockey Web Application</p>
+              <p class="blog-title">{{ post.title }}</p>
               <p class="blog-excerpt">
-                Automated stat tracking for my local hockey league. Stores data in AWS S3 and refreshes daily using GitHub Actions.
+                {{ post.description }}
               </p>
-              <span class="blog-reading-time">Live app</span>
+              <span class="blog-reading-time">{{ post.reading_time }}</span>
             </div>
-            <span class="project-arrow">↗</span>
+            <span class="project-arrow">{% if post.external_url %}↗{% else %}→{% endif %}</span>
           </a>
+          {% endfor %}
+
         </div>
       </div>
-
-      <div class="column">
-        <div class="projects-list">
-          <a href="decision-boundaries.html" class="project-card">
-            <span class="project-num">02</span>
-            <div class="blog-body">
-              <div class="blog-meta">
-                <span class="blog-date">March 2024</span>
-                <span class="blog-category">Machine Learning</span>
-                <span class="blog-category">Data Visualization</span>
-                <span class="blog-category">Supervised Learning</span>
-              </div>
-              <p class="blog-title">Exploring Decision Boundaries Visually with Neural Nets, Trees, and Regressors</p>
-              <p class="blog-excerpt">
-                A practical comparison of classical ML models versus neural networks on a real classification task.
-              </p>
-              <span class="blog-reading-time">8 min read</span>
-            </div>
-            <span class="blog-arrow">↗</span>
-          </a>
-        </div>
-      </div>
-
     </div>
   </section>
 
