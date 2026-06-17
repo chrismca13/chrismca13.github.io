@@ -688,13 +688,13 @@ layout: null
         </p>
       </div>
       <div class="contact-links">
-        <a href="mailto:chrismca@umich.edu" class="contact-link">
-          <div>
-            <p class="contact-link-label">Email</p>
-            <p class="contact-link-value">chrismca@umich.edu</p>
-          </div>
-          <span class="contact-link-arrow">↗</span>
-        </a>
+        <a href="#" onclick="copyEmail(event)" class="contact-link" style="cursor: copy;">
+        <div>
+          <p class="contact-link-label">Email (Click to copy)</p>
+          <p class="contact-link-value">chrismca@umich.edu</p>
+        </div>
+        <span class="contact-link-arrow" id="email-copy-btn" style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Copy</span>
+      </a>
         <a href="https://www.linkedin.com/in/chris-mcallister-b7597710b/" target="_blank" class="contact-link">
           <div>
             <p class="contact-link-label">LinkedIn</p>
@@ -709,7 +709,7 @@ layout: null
           </div>
           <span class="contact-link-arrow">↗</span>
         </a>
-        <a href="assets/Chris_McAllister_Resume.pdf" target="_blank" class="contact-link">
+        <a href="assets/Chris_McAllister_Resume.pdf" target="assets/Chris_McAllister_Resume.pdf" class="contact-link">
           <div>
             <p class="contact-link-label">Résumé</p>
             <p class="contact-link-value">Download PDF</p>
@@ -725,6 +725,38 @@ layout: null
 <footer>
   <p>Chris McAllister &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; Berkeley, CA</p>
 </footer>
+
+<script>
+  function copyEmail(event) {
+    // 1. Prevent the page from jumping or trying to open an email app
+    event.preventDefault();
+    const emailText = "chrismca@umich.edu";
+    
+    // 2. Create a temporary off-screen input element to copy from
+    // (This guarantees it works reliably inside web-page frames)
+    const tempTextArea = document.createElement('textarea');
+    tempTextArea.value = emailText;
+    tempTextArea.setAttribute('readonly', '');
+    tempTextArea.style.position = 'absolute';
+    tempTextArea.style.left = '-9999px';
+    document.body.appendChild(tempTextArea);
+    
+    tempTextArea.select();
+    document.execCommand('copy'); // Perfect fallback for iframe security environments
+    document.body.removeChild(tempTextArea);
+
+    // 3. Provide visual user feedback on the card itself
+    const copyButton = document.getElementById('email-copy-btn');
+    copyButton.textContent = 'Copied!';
+    copyButton.style.color = 'var(--accent)';
+    
+    // 4. Reset back to "Copy" after 2 seconds
+    setTimeout(() => {
+      copyButton.textContent = 'Copy';
+      copyButton.style.color = 'var(--ink-faint)';
+    }, 2000);
+  }
+</script>
 
 </body>
 </html>
