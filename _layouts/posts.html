@@ -2,30 +2,60 @@
 layout: default
 ---
 <style>
-  /* GLOBAL BLOG IMAGE CONSTRAINTS */
-  main img {
-    max-width: 100%;       /* Prevents the image from overflowing its container */
-    height: auto;          /* Maintains the correct aspect ratio as it scales down */
-    display: block;        /* Prevents inline text wrapping issues */
-    margin: 2rem auto;     /* Centers the image and adds breathing room top & bottom */
-    border-radius: 6px;    /* Subtle rounding to match your aesthetic */
-    border: 1px solid var(--rule); /* Matches your site's soft divider colors */
+  /* POST LAYOUT CONTAINER */
+  .post-content {
+    max-width: 740px;      /* The golden standard for readable text line lengths and bounded images */
+    margin: 0 auto;        /* Centers the article column on the screen */
+    padding: 3rem 1.5rem 6rem 1.5rem; /* Generous breathing room on top, bottom, and mobile sides */
   }
 
-  /* Style image captions (if you write *Italic Text* immediately below an image) */
-  main img + em {
+  /* GLOBAL BLOG IMAGE CONSTRAINTS */
+  .post-content img {
+    max-width: 100%;       /* Keeps the image bound strictly to your 740px reading column */
+    height: auto;          /* Prevents stretching or distortion */
+    display: block;        
+    margin: 3rem auto;     /* Adds generous vertical space to let the images breathe */
+    border-radius: 6px;    /* Subtle rounded edges */
+    border: 1px solid var(--rule); /* Soft border to frame light screenshots against your background */
+  }
+
+  /* Style image captions (written as *Italics* directly underneath an image) */
+  .post-content img + em {
     display: block;
     text-align: center;
     font-family: var(--mono);
     font-size: 0.85rem;
     color: var(--ink-muted);
-    margin-top: -1rem;
-    margin-bottom: 2rem;
+    margin-top: -2rem;
+    margin-bottom: 3rem;
   }
+
+  /* TYPOGRAPHY ADJUSTMENTS FOR READABILITY */
+  .post-content p {
+    font-size: 1.15rem;     /* Slightly larger font for long-form reading */
+    line-height: 1.8;       /* Relaxed spacing so text is easy on the eyes */
+    margin-bottom: 1.8rem;
+    color: var(--ink);
+  }
+
+  .post-content h1, 
+  .post-content h2, 
+  .post-content h3 {
+    font-family: var(--news);
+    font-weight: 300;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+
+  .post-content h1 { font-size: 2.4rem; }
+  .post-content h2 { font-size: 1.9rem; }
 </style>
 
-<div class="back-btn-container">
-  <a href="/" class="back-btn">← Back to Portfolio</a>
-</div>
+<div class="post-content">
+  <div class="back-btn-container">
+    <a href="/" class="back-btn">← Back to Portfolio</a>
+  </div>
 
-{{ content }}
+  {{ content }}
+</div>
