@@ -22,33 +22,26 @@ layout: default
     border: 1px solid var(--rule); 
   }
 
-  /* GITHUB LIGHT-MODE STYLE FOR ALL JEKYLL HIGHLIGHTERS */
-  .post-content pre,
-  .post-content .highlight,
-  .post-content .highlighter-rouge,
-  .post-content [class^="language-"] {
-    background-color: #f6f8fa !important;  /* GitHub Gray Background */
-    color: #24292f !important;             /* High contrast base text */
-    border: 1px solid #d0d7de !important;   /* GitHub Border Accent */
+  /* GITHUB STYLE MINIMAL CODE BLOCKS */
+  .post-content pre, 
+  .post-content .highlight {
+    background-color: #f6f8fa !important;  /* GitHub's exact light-gray */
+    border: 1px solid #d0d7de !important;   /* GitHub's subtle gray border */
     border-radius: 6px !important;
-  }
-
-  /* Structural adjustment for the block container */
-  .post-content pre {
-    position: relative !important; /* Base for positioning the button */
-    padding: 16px 45px 16px 16px !important; /* Room on the right for copy button */
-    overflow-x: auto !important;
+    padding: 16px !important;
     margin: 1.5rem 0 !important;
-    display: block !important;
+    overflow-x: auto !important;           /* Allows horizontal scrolling */
   }
 
+  /* Code font stack matching GitHub */
   .post-content code {
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
     font-size: 14px !important;
     line-height: 1.45 !important;
+    color: #24292f !important;             /* Base code text color */
   }
 
-  /* Inline code highlighting (e.g. `code` inside paragraphs) */
+  /* Inline code highlighting inside standard text paragraph lines */
   .post-content p code, 
   .post-content li code {
     background-color: rgba(175, 184, 193, 0.2) !important;
@@ -56,57 +49,6 @@ layout: default
     font-size: 85% !important;
     border-radius: 6px !important;
     color: #24292f !important;
-    border: none !important;
-  }
-
-  /* INJECTED COPY BUTTON STYLING */
-  .code-copy-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    background-color: #f6f8fa;
-    border: 1px solid #d0d7de;
-    border-radius: 6px;
-    cursor: pointer;
-    opacity: 0; /* Fades in on hover */
-    transition: opacity 0.2s ease, background-color 0.1s ease;
-    z-index: 99;
-    padding: 0;
-  }
-
-  /* Show button when hovering over the parent code block */
-  .post-content pre:hover .code-copy-btn {
-    opacity: 1;
-  }
-
-  .code-copy-btn:hover {
-    background-color: #f3f4f6;
-    border-color: #8c959f;
-  }
-
-  .code-copy-btn svg {
-    width: 14px;
-    height: 14px;
-    fill: #57606a;
-  }
-
-  /* Success Bubble Alert */
-  .code-copy-btn.copied::before {
-    content: "Copied!";
-    position: absolute;
-    left: -60px;
-    top: 2px;
-    background: #24292f;
-    color: #fff;
-    font-size: 11px;
-    font-family: -apple-system, sans-serif;
-    padding: 3px 6px;
-    border-radius: 4px;
   }
 
   /* TYPOGRAPHY */
@@ -123,44 +65,3 @@ layout: default
 
   {{ content }}
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Target standard pre-tags directly where text blocks are outputted
-    const preBlocks = document.querySelectorAll(".post-content pre");
-
-    preBlocks.forEach((pre) => {
-      // 1. Double check we don't duplicate rendering loops
-      if (pre.querySelector(".code-copy-btn")) return;
-
-      // 2. Create button structural layout
-      const button = document.createElement("button");
-      button.className = "code-copy-btn";
-      button.type = "button";
-      button.setAttribute("aria-label", "Copy code block");
-      button.innerHTML = `
-        <svg viewBox="0 0 16 16">
-          <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
-          <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
-        </svg>
-      `;
-
-      // 3. Inject copy elements directly inside the wrapper pre tag boundary 
-      pre.appendChild(button);
-
-      // 4. Click event interaction script
-      button.addEventListener("click", function (e) {
-        e.preventDefault();
-        // Grab code strings, stripping away button's text value inside string extractions
-        const codeText = pre.querySelector("code")?.innerText || pre.innerText.replace("Copied!", "");
-
-        navigator.clipboard.writeText(codeText.trim()).then(() => {
-          button.classList.add("copied");
-          setTimeout(() => button.classList.remove("copied"), 2000);
-        }).catch((err) => {
-          console.error("Could not copy layout text blocks: ", err);
-        });
-      });
-    });
-  });
-</script>
