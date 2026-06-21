@@ -15,12 +15,12 @@ I think AWS is the best way to share data among your team. Here we'll discuss so
 _____________
 **If you are interested in reading and writing files to the cloud while working in your local VS Code then this setup is for you.**
 
-- Module 0: [Do You Need the Cloud?](https://github.com/chrismca13/aws-demo/tree/main/0_Do-you-need-the-cloud)
-- Module 1: [Setting up the AWS Account](https://github.com/chrismca13/aws-demo/tree/main/1_setting_up_the_aws_account#siads-699---module-1-download-setting-up-the-root-user)
-- Module 2: [Setting up the Admin Role](https://github.com/chrismca13/aws-demo/tree/main/2_setting_up_the_admin_role#siads-699---module-2-setting-up-admin-access)
-- Module 3: [Setting up the Team Accounts](https://github.com/chrismca13/aws-demo/tree/main/3_setting_team_accounts#siads-699---module-3-setting-up-admin-access)
-- Module 4: [Accessing S3 from VS Code ](https://github.com/chrismca13/aws-demo/tree/main/4_accessing_S3_from_VS_code)
-- Module 5: [Setting up Spending Threshold Alerting ](https://github.com/chrismca13/aws-demo/tree/main/5_setting_up_spend_alerting)
+- Module 0: [Do You Need the Cloud?](#module-0)
+- Module 1: [Setting up the AWS Account](#module-1)
+- Module 2: [Setting up the Admin Role](#module-2)
+- Module 3: [Setting up the Team Accounts](#module-3)
+- Module 4: [Accessing S3 from VS Code ](#module-4)
+- Optional: [Setting up Spending Threshold Alerting ](#module-5)
 
 
 After your complete the steps above, your team will be able to write and read from the cloud with a single line of code like this:
@@ -53,7 +53,7 @@ import pandas as pd
 df = pd.read_csv("s3://umich-capstone-project/data.csv")
 ```
 
-## SIADS 699 - Module 0: Is using AWS worth the effort?
+## SIADS 699 - Module 0: Is using AWS worth the effort? {: #module-0}
 
 ### What is AWS?
 
@@ -167,7 +167,7 @@ clf = pickle.load(model_buffer)
 Being comfortable in the cloud is a good skill for any data scientist - if nothing else this is a great reason to use AWS in your project workflow. If this feels worth it to you, head to [the second module](https://github.com/chrismca13/aws-demo/tree/main/1_setting_up_the_aws_account)!
 
 
-## SIADS 699 - Module 1: Download Setting up the Root User
+## SIADS 699 - Module 1: Download Setting up the Root User {: #module-1}
 One person on the team will be the "Root User." This person's responsibilites will include:
 * Setting up the team's AWS accounts.
 * Maintaining responsibility for billing (ie you will supply your own credit card)
@@ -206,7 +206,7 @@ In the [next module](https://github.com/chrismca13/aws-demo/tree/main/2_setting_
 * Talk through how to set up roles with limited access for your teammates.
 
 
-## SIADS 699 - Module 2: Setting up Admin Access
+## SIADS 699 - Module 2: Setting up Admin Access {: #module-2}
 Now that the Root User role is set up, you can create an admin role for you to work out of. 
 
 ### Setting up an Admin Role
@@ -243,7 +243,7 @@ It's a best practice to stay out of the root user role when possible. The first 
 [In the next module](https://github.com/chrismca13/aws-demo/tree/main/3_setting_team_accounts), we'll cover how to get access to S3 for you and your team so you all can easily save and share dataset. 
 
 
-## SIADS 699 - Module 3: Setting up your Team's Accounts
+## SIADS 699 - Module 3: Setting up your Team's Accounts {: #module-3}
 Now that you have your admin role ready we're going to create accounts for you and your team. 
 
 ### Setting up your team's access group.
@@ -303,7 +303,7 @@ Now that you have your admin role ready we're going to create accounts for you a
 
 
 
-## SIADS 699: Using S3 from VS Code
+## SIADS 699 - Module 4: Using S3 from VS Code {: #module-4}
 Now that your roles are created and you gave your team access to S3, you can read share datasets from local VS code!
 
 ### Logging in to AWS from VS Code
@@ -359,7 +359,7 @@ If this was interesting to you at all and you'd like to know more about the clou
 The `Certificed Cloud Practioner` --> `AWS Certified Machine Learning Engineer` --> `Certified Data Engineer` is a great path to focus on after you complete the MADS program. Good luck!
 
 
-## SIADS 699: Setting up Spend Alerts
+## Optional: Setting up Spend Alerts {: #module-5}
 Now that you've got your team set up, you've tested the connection, and everything is working it's time to take some steps to reduce the likelihood of you getting a huge AWS bill. 
 
 Like we said before, AWS is not required for this course and your instructors, the University of Michigan, and the MADS program are NOT responsible for any bills you rack up in AWS. 
