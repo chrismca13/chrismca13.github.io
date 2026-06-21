@@ -212,26 +212,29 @@ Now that the Root User role is set up, you can create an admin role for you to w
 ### Setting up an Admin Role
 It's a best practice to stay out of the root user role when possible. The first thing you should do is create an `admin-role` by doing the following:
 1. Search and click on `IAM` in the search bar at the top of the home page:
-![alt text](../images/aws-demo/iam.png)
+![alt text]({{ '../images/aws-demo/iam.png' | relative_url }})
+
 
 2. On the side panel on the left click `IAM Users` and click `Create User`
-![alt text](../images/aws-demo/create_user.png)
+![alt text]({{ '../images/aws-demo/create_user.png' | relative_url }})
 
 3. Create a role named `admin-role`
 4. Click the `Create Group` button on the top right of the `User Groups` box.
 5. This will give you access to a bunch of pre-made access policies created by AWS. The one I recommend adding to your `admin-role` is called `AdministratorAccess` policy. Assing a name to the group too. In the example below I called it `admin`. The setup should look like what you see below. Click `Create User Group` when you're ready:
 
-![alt text](../images/aws-demo/admin-access.png)
+![alt text]({{ '../images/aws-demo/admin-access.png' | relative_url }})
+
 
 6. Check the box next to your newly created `admin` group and click the orange next button:
-![alt text](../images/aws-demo/create-group.png)
+![alt text]({{ '../images/aws-demo/create-group.png' | relative_url }})
+
 
 ### Logging in to the Admin Role
 0. It's a best practice to only log in to the root-user when you really need to. Most of your work should be done in the admin role from here on out. 
 1. Click on `Users` in the side bar on the left.
 2. You should see your newly created role.
 3. Click on the role, navigate to the Security Credentials tab, and click the Enable Console Access button:
-![alt text](../images/aws-demo/console_access.png)
+![alt text]({{ '../images/aws-demo/console_access.png' | relative_url }})
 4. Click the orange Enable Console Access button. This generates your user name and one time password. Save it and don't lose it. Click the `Download .csv file` to be safe. 
 5. Copy the `Console sign-in link URL` and paste it into your browser. As the admin of the project you'll be using this role throughout the project. **Favorite this link so you can easily get back to the log in**
 6. Sign in with your username and password (that you hopefully downloaded) and you're in!
@@ -255,7 +258,8 @@ Now that you have your admin role ready we're going to create accounts for you a
 4. Assuming you want to give your team read and write access give the name `full-s3-access` to user group, do not check any of the users in the second box, check the box next to `AmazonS3FullAccess` policy, and click the `Create user group`. It should look like this when you're done:
     * If you only want to provide only read access, simply check the box next to `AmazonS3ReadOnlyAccess` instead. Update the name of the role too so it says `read-s3-access`
 
-![alt text](../images/aws-demo/s3-access-group.png)
+![alt text]({{ '../images/aws-demo/s3-access-group.png' | relative_url }})
+
 
 ### Setting up your team's accounts.
 1. Go back to `IAM` and click the `IAM users` on the left side panel.
@@ -268,10 +272,11 @@ Now that you have your admin role ready we're going to create accounts for you a
 ### Giving you team access to S3:
 1. Go back to `IAM` and click `IAM users` on the left side panel.
 2. Click the blue link on you teammates name:
-![alt text](../images/aws-demo/click-user.png)
+![alt text]({{ '../images/aws-demo/click-user.png' | relative_url }})
+
 
 3. Click the `Security credentials` banner across the top and click the `Create access key` button about halfway down the page:
-![alt text](../images/aws-demo/access-key.png)
+![alt text]({{ '../images/aws-demo/access-key.png' | relative_url }})
 
 4. Click the `Command Line Interface (CLI)` circle under "Use case", check the box at the bottom, and click `Next`
 
@@ -279,7 +284,8 @@ Now that you have your admin role ready we're going to create accounts for you a
 
 6. You won't be able to generate this key again, so it's very important you don't lose it. Like before I recommend click the `Download .csv file` button and sharing it with your teammate.
 
-![alt text](../images/aws-demo/access-key-download.png)
+![alt text]({{ '../images/aws-demo/access-key-download.png' | relative_url }})
+
 
 7. Repeat steps 1-6 for all of your teammates.
 
@@ -364,14 +370,16 @@ Like we said before, AWS is not required for this course and your instructors, t
 2. Log in as the root user you set up way back in Module 1.  
 3. Search for `Billing and Cost Management` in the search bar above and click it.
 4. Click `Budgets` on the side panel on the left. Everything should look like this at this point:
-![alt text](../images/aws-demo/budgets.png)
+![alt text]({{ '../images/aws-demo/budgets.png' | relative_url }})
+
 5. Click the orange `Create budget` button in the top right. 
 6. On the next page only change the following:
 - Update the budget name to whatever you want, I called mine `My $0.05 Budget Alert`
 - Update the `Email Recipients` to whatever email you check most frequenty. 
 - The set up should look like this:
 
-![alt text](../images/aws-demo/budget-setup.png)
+![alt text]({{ '../images/aws-demo/budget-setup.png' | relative_url }})
+
 
 7. Click the orange `Create budget` button at the bottom right. 
 8. Click the blue link on your newly created budget on the next page. 
@@ -379,7 +387,8 @@ Like we said before, AWS is not required for this course and your instructors, t
 10. Here you can customize to make sure you get alerted to whatever dollar amount your comfortable with. If you're only using AWS for data storage in S3, this is a good set up unders `Set budget amount`
 - This will send you an email if you ever spend more than $.05 on a day:
 
-![alt text](../images/aws-demo/budget-amount.png)
+![alt text]({{ '../images/aws-demo/budget-amount.png' | relative_url }})
+
 
 11. Leave the other setting as is, scroll to the bottom, and click the orange `Next` button. 
 12. Optionally, you can set additional alterting here that will give you an email if you start to approach the threshold you set in step 10. 
