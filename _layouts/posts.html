@@ -4,94 +4,120 @@ layout: default
 <style>
   /* POST LAYOUT CONTAINER */
   .post-content {
-    max-width: 740px;      /* Golden standard for readable text line lengths */
+    max-width: 740px;
     width: 100%;
-    margin: 0 auto;        /* Centers the article column on the screen */
-    padding: 3rem 1.5rem 6rem 1.5rem; /* Breathing room */
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem 1.5rem;
     box-sizing: border-box;
   }
 
   /* GLOBAL DEFAULT BLOG IMAGE CONSTRAINTS */
   .post-content img {
-    max-width: 550px !important; /* Scaled down default maximum width */
-    width: 100%;                 /* Fluid on mobile */
-    height: auto !important;     /* Maintains correct aspect ratio */
+    max-width: 550px !important;
+    width: 100%;
+    height: auto !important;
     display: block;        
-    margin: 2.5rem auto !important; /* Centers and adds vertical breathing room */
+    margin: 2.5rem auto !important;
     border-radius: 6px;    
     border: 1px solid var(--rule); 
   }
 
   /* IMAGE UTILITY CLASSES */
-  .post-content img.img-small {
-    max-width: 350px !important;
+  .post-content img.img-small { max-width: 350px !important; }
+  .post-content img.img-medium { max-width: 480px !important; }
+  .post-content img.img-large { max-width: 100% !important; }
+
+  /* GITHUB-STYLE CODE BLOCK WRAPPER & CONTRAST */
+  .post-code-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    background-color: #f6f8fa; /* GitHub light-mode gray */
+    overflow: hidden;
   }
 
-  .post-content img.img-medium {
-    max-width: 480px !important;
+  /* Keep Jekyll's syntax highlighter layout aligned */
+  .post-content pre, 
+  .post-content .highlight {
+    margin: 0 !important;
+    padding: 16px !important;
+    background-color: transparent !important; /* Managed by wrapper */
+    border: none !important;
+    overflow-x: auto;
   }
 
-  .post-content img.img-large {
-    max-width: 100% !important; /* Expands to full 740px column width if needed */
-  }
-
-  /* Style image captions */
-  .post-content img + em {
-    display: block;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 0.85rem;
-    color: var(--ink-muted);
-    margin-top: -1.5rem;
-    margin-bottom: 2.5rem;
-  }
-
-  /* GITHUB-STYLE CODE BLOCKS */
-  .post-content pre {
-    background-color: #f6f8fa !important;  /* GitHub's light-mode code background */
-    border: 1px solid #d0d7de !important;   /* GitHub's light-mode code border */
-    border-radius: 6px !important;          /* Rounded corners */
-    padding: 16px !important;               /* Inner spacing */
-    overflow-x: auto !important;            /* Responsive horizontal scroll */
-    margin-bottom: 1.5rem !important;       /* Space below block */
-    font-size: 14.5px !important;           /* Readable font scale */
-    line-height: 1.45 !important;           /* Comfortable line spacing */
-  }
-
-  /* Code font stack matching GitHub */
   .post-content code {
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace !important;
-    font-size: 85% !important;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
+    font-size: 14px !important;
+    line-height: 1.45 !important;
+    color: #24292f; /* Deep high-contrast gray for code text */
   }
 
-  /* Inline code highlighting (e.g. `code` inside paragraphs) */
+  /* Inline code highlighting inside paragraphs */
   .post-content p code, 
   .post-content li code {
-    background-color: rgba(175, 184, 193, 0.2) !important; /* Translucent grey background */
+    background-color: rgba(175, 184, 193, 0.2) !important;
     padding: 0.2em 0.4em !important;
-    margin: 0 !important;
     font-size: 85% !important;
     border-radius: 6px !important;
+    color: #24292f;
   }
 
-  /* TYPOGRAPHY ADJUSTMENTS FOR READABILITY */
-  .post-content p {
-    font-size: 1.15rem;     
-    line-height: 1.8;       
-    margin-bottom: 1.8rem;
-    color: var(--ink);
+  /* GITHUB-STYLE COPY BUTTON */
+  .code-copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0; /* Hidden by default, fades in on hover */
+    transition: opacity 0.2s ease, background-color 0.1s ease;
+    z-index: 10;
   }
 
-  .post-content h1, 
-  .post-content h2, 
-  .post-content h3 {
-    font-family: var(--news);
-    font-weight: 300;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    line-height: 1.25;
+  /* Show copy button when hovering over the code wrapper */
+  .post-code-wrapper:hover .code-copy-btn {
+    opacity: 1;
   }
 
+  .code-copy-btn:hover {
+    background-color: #f3f4f6;
+    border-color: #8c959f;
+  }
+
+  /* Copy Button Icon (SVG clipboard) */
+  .code-copy-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: #57606a;
+  }
+
+  /* Copied Success Popup State */
+  .code-copy-btn.copied::before {
+    content: "Copied!";
+    position: absolute;
+    left: -60px;
+    top: 2px;
+    background: #24292f;
+    color: #fff;
+    font-size: 11px;
+    font-family: sans-serif;
+    padding: 3px 6px;
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  /* TYPOGRAPHY ADJUSTMENTS */
+  .post-content p { font-size: 1.15rem; line-height: 1.8; margin-bottom: 1.8rem; color: var(--ink); }
+  .post-content h1, .post-content h2, .post-content h3 { font-family: var(--news); font-weight: 300; margin-top: 3rem; margin-bottom: 1rem; }
   .post-content h1 { font-size: 2.4rem; }
   .post-content h2 { font-size: 1.9rem; }
 </style>
@@ -103,3 +129,53 @@ layout: default
 
   {{ content }}
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Find all target code blocks rendered by Jekyll/Kramdown
+    const codeBlocks = document.querySelectorAll(".post-content pre, .post-content .highlight");
+
+    codeBlocks.forEach((block) => {
+      // Don't double wrap if Jekyll nests a <pre> inside a .highlight
+      if (block.tagName === "PRE" && block.parentElement.classList.contains("highlight")) {
+        return;
+      }
+
+      // 1. Create wrapper container
+      const wrapper = document.createElement("div");
+      wrapper.className = "post-code-wrapper";
+
+      // 2. Create the copy button element
+      const button = document.createElement("button");
+      button.className = "code-copy-btn";
+      button.setAttribute("aria-label", "Copy code to clipboard");
+      
+      // Inline SVG implementation for GitHub clipboard icon
+      button.innerHTML = `
+        <svg viewBox="0 0 16 16">
+          <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
+          <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+      `;
+
+      // 3. Inject wrapper into DOM right before the code block
+      block.parentNode.insertBefore(wrapper, block);
+      wrapper.appendChild(block);
+      wrapper.appendChild(button);
+
+      // 4. Add the click handler event to clipboard actions
+      button.addEventListener("click", function () {
+        const codeText = block.querySelector("code")?.innerText || block.innerText;
+
+        navigator.clipboard.writeText(codeText).then(() => {
+          button.classList.add("copied");
+          setTimeout(() => {
+            button.classList.remove("copied");
+          }, 2000);
+        }).catch((err) => {
+          console.error("Failed to copy text: ", err);
+        });
+      });
+    });
+  });
+</script>
