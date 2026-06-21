@@ -1,8 +1,7 @@
 ---
 layout: post
-title: "AWS Guide: Getting Startd in the Cloud?"
-date: 2026-09-15
-categories: [AWS, Cloud]
+title: "AWS Demo: Getting Started in the Cloud"
+description: "A step-by-step guide of MLOps basics in cloud infrastructure"
 ---
 
 ## SIADS 699: Getting Started in the Cloud
