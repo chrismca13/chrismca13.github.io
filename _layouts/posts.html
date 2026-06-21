@@ -1,6 +1,28 @@
 ---
 layout: default
 ---
+<style>
+  /* GLOBAL BLOG IMAGE CONSTRAINTS */
+  main img {
+    max-width: 100%;       /* Prevents the image from overflowing its container */
+    height: auto;          /* Maintains the correct aspect ratio as it scales down */
+    display: block;        /* Prevents inline text wrapping issues */
+    margin: 2rem auto;     /* Centers the image and adds breathing room top & bottom */
+    border-radius: 6px;    /* Subtle rounding to match your aesthetic */
+    border: 1px solid var(--rule); /* Matches your site's soft divider colors */
+  }
+
+  /* Style image captions (if you write *Italic Text* immediately below an image) */
+  main img + em {
+    display: block;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+  }
+</style>
 
 <div class="back-btn-container">
   <a href="/" class="back-btn">← Back to Portfolio</a>
