@@ -8,7 +8,6 @@ layout: default
     width: 100%;
     margin: 0 auto;
     padding: 3rem 1.5rem 6rem 1.5rem;
-    box-sizing: border-box;
   }
 
   /* GLOBAL DEFAULT BLOG IMAGE CONSTRAINTS */
@@ -22,36 +21,42 @@ layout: default
     border: 1px solid var(--rule); 
   }
 
-  /* IMAGE UTILITY CLASSES */
-  .post-content img.img-small { max-width: 350px !important; }
-  .post-content img.img-medium { max-width: 480px !important; }
-  .post-content img.img-large { max-width: 100% !important; }
-
   /* GITHUB-STYLE CODE BLOCK WRAPPER & CONTRAST */
   .post-code-wrapper {
     position: relative;
-    margin-bottom: 1.5rem;
-    border: 1px solid #d0d7de;
-    border-radius: 6px;
-    background-color: #f6f8fa; /* GitHub light-mode gray */
+    margin: 1.5rem 0 !important;
+    border: 1px solid #d0d7de !important;
+    border-radius: 6px !important;
+    background-color: #f6f8fa !important; /* Force GitHub light-mode gray background */
     overflow: hidden;
+    width: 100%;
   }
 
-  /* Keep Jekyll's syntax highlighter layout aligned */
-  .post-content pre, 
-  .post-content .highlight {
-    margin: 0 !important;
-    padding: 16px !important;
-    background-color: transparent !important; /* Managed by wrapper */
+  /* Strip Jekyll's default highlighter boxes down so our wrapper handles the look */
+  .post-content [class^="language-"],
+  .post-content .highlighter-rouge,
+  .post-content .highlight,
+  .post-content pre {
+    background: transparent !important;
+    background-color: transparent !important;
     border: none !important;
-    overflow-x: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Apply the actual padding and scrolling to the pre tag inside the wrapper */
+  .post-code-wrapper pre {
+    padding: 16px !important;
+    overflow-x: auto !important;
+    display: block !important;
+    margin: 0 !important;
   }
 
   .post-content code {
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
     font-size: 14px !important;
     line-height: 1.45 !important;
-    color: #24292f; /* Deep high-contrast gray for code text */
+    color: #24292f !important; /* Force deep high-contrast text color */
   }
 
   /* Inline code highlighting inside paragraphs */
@@ -61,7 +66,7 @@ layout: default
     padding: 0.2em 0.4em !important;
     font-size: 85% !important;
     border-radius: 6px !important;
-    color: #24292f;
+    color: #24292f !important;
   }
 
   /* GITHUB-STYLE COPY BUTTON */
@@ -78,12 +83,13 @@ layout: default
     border: 1px solid #d0d7de;
     border-radius: 6px;
     cursor: pointer;
-    opacity: 0; /* Hidden by default, fades in on hover */
+    opacity: 0; /* Hidden until hovered */
     transition: opacity 0.2s ease, background-color 0.1s ease;
     z-index: 10;
+    padding: 0;
   }
 
-  /* Show copy button when hovering over the code wrapper */
+  /* Show button when hovering over the code wrapper block */
   .post-code-wrapper:hover .code-copy-btn {
     opacity: 1;
   }
@@ -93,14 +99,13 @@ layout: default
     border-color: #8c959f;
   }
 
-  /* Copy Button Icon (SVG clipboard) */
   .code-copy-btn svg {
     width: 14px;
     height: 14px;
     fill: #57606a;
   }
 
-  /* Copied Success Popup State */
+  /* Copied Success State popup */
   .code-copy-btn.copied::before {
     content: "Copied!";
     position: absolute;
@@ -109,7 +114,7 @@ layout: default
     background: #24292f;
     color: #fff;
     font-size: 11px;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     padding: 3px 6px;
     border-radius: 4px;
     pointer-events: none;
@@ -117,7 +122,7 @@ layout: default
 
   /* TYPOGRAPHY ADJUSTMENTS */
   .post-content p { font-size: 1.15rem; line-height: 1.8; margin-bottom: 1.8rem; color: var(--ink); }
-  .post-content h1, .post-content h2, .post-content h3 { font-family: var(--news); font-weight: 300; margin-top: 3rem; margin-bottom: 1rem; }
+  .post-content h1, .post-content h2, .post-content h3 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-weight: 600; margin-top: 3rem; margin-bottom: 1rem; }
   .post-content h1 { font-size: 2.4rem; }
   .post-content h2 { font-size: 1.9rem; }
 </style>
@@ -132,25 +137,25 @@ layout: default
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Find all target code blocks rendered by Jekyll/Kramdown
-    const codeBlocks = document.querySelectorAll(".post-content pre, .post-content .highlight");
+    // Target the outermost wrapper Jekyll can possibly create for code blocks
+    const highlighters = document.querySelectorAll('.post-content [class^="language-"], .post-content .highlighter-rouge, .post-content pre');
 
-    codeBlocks.forEach((block) => {
-      // Don't double wrap if Jekyll nests a <pre> inside a .highlight
-      if (block.tagName === "PRE" && block.parentElement.classList.contains("highlight")) {
-        return;
-      }
+    highlighters.forEach((block) => {
+      // Find the absolute inner pre element where the code lives
+      const preTag = block.tagName === "PRE" ? block : block.querySelector("pre");
+      if (!preTag || preTag.dataset.processed) return; // Prevent double-wrapping bugs
 
-      // 1. Create wrapper container
+      // Mark as processed immediately
+      preTag.dataset.processed = "true";
+
+      // 1. Create container wrapper
       const wrapper = document.createElement("div");
       wrapper.className = "post-code-wrapper";
 
-      // 2. Create the copy button element
+      // 2. Create copy button element
       const button = document.createElement("button");
       button.className = "code-copy-btn";
       button.setAttribute("aria-label", "Copy code to clipboard");
-      
-      // Inline SVG implementation for GitHub clipboard icon
       button.innerHTML = `
         <svg viewBox="0 0 16 16">
           <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
@@ -158,22 +163,25 @@ layout: default
         </svg>
       `;
 
-      // 3. Inject wrapper into DOM right before the code block
+      // 3. Re-arrange DOM structure safely
       block.parentNode.insertBefore(wrapper, block);
-      wrapper.appendChild(block);
+      wrapper.appendChild(preTag); // Pulls only the clean pre block inside our styled box
       wrapper.appendChild(button);
 
-      // 4. Add the click handler event to clipboard actions
+      // Clean up empty outer containers left over by Jekyll if applicable
+      if (block !== preTag && block.childNodes.length === 0) {
+        block.remove();
+      }
+
+      // 4. Copy Event Handler
       button.addEventListener("click", function () {
-        const codeText = block.querySelector("code")?.innerText || block.innerText;
+        const codeText = preTag.querySelector("code")?.innerText || preTag.innerText;
 
         navigator.clipboard.writeText(codeText).then(() => {
           button.classList.add("copied");
-          setTimeout(() => {
-            button.classList.remove("copied");
-          }, 2000);
+          setTimeout(() => button.classList.remove("copied"), 2000);
         }).catch((err) => {
-          console.error("Failed to copy text: ", err);
+          console.error("Failed to copy code: ", err);
         });
       });
     });
