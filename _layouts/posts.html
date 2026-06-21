@@ -4,19 +4,35 @@ layout: default
 <style>
   /* POST LAYOUT CONTAINER */
   .post-content {
-    max-width: 740px;      /* The golden standard for readable text line lengths and bounded images */
+    max-width: 740px;      /* Golden standard for readable text line lengths */
+    width: 100%;
     margin: 0 auto;        /* Centers the article column on the screen */
-    padding: 3rem 1.5rem 6rem 1.5rem; /* Generous breathing room on top, bottom, and mobile sides */
+    padding: 3rem 1.5rem 6rem 1.5rem; /* Breathing room */
+    box-sizing: border-box;
   }
 
-  /* GLOBAL BLOG IMAGE CONSTRAINTS */
+  /* GLOBAL DEFAULT BLOG IMAGE CONSTRAINTS */
   .post-content img {
-    max-width: 100%;       /* Keeps the image bound strictly to your 740px reading column */
-    height: auto;          /* Prevents stretching or distortion */
+    max-width: 550px !important; /* Scaled down default maximum width (instead of a massive 740px) */
+    width: 100%;                 /* Fluid on mobile */
+    height: auto !important;     /* Maintains correct aspect ratio */
     display: block;        
-    margin: 3rem auto;     /* Adds generous vertical space to let the images breathe */
-    border-radius: 6px;    /* Subtle rounded edges */
-    border: 1px solid var(--rule); /* Soft border to frame light screenshots against your background */
+    margin: 2.5rem auto !important; /* Centers and adds vertical breathing room */
+    border-radius: 6px;    
+    border: 1px solid var(--rule); 
+  }
+
+  /* IMAGE UTILITY CLASSES (Use these in Markdown to make specific images smaller) */
+  .post-content img.img-small {
+    max-width: 350px !important;
+  }
+
+  .post-content img.img-medium {
+    max-width: 480px !important;
+  }
+
+  .post-content img.img-large {
+    max-width: 100% !important; /* Expands to full 740px column width if needed */
   }
 
   /* Style image captions (written as *Italics* directly underneath an image) */
@@ -26,14 +42,14 @@ layout: default
     font-family: var(--mono);
     font-size: 0.85rem;
     color: var(--ink-muted);
-    margin-top: -2rem;
-    margin-bottom: 3rem;
+    margin-top: -1.5rem;
+    margin-bottom: 2.5rem;
   }
 
   /* TYPOGRAPHY ADJUSTMENTS FOR READABILITY */
   .post-content p {
-    font-size: 1.15rem;     /* Slightly larger font for long-form reading */
-    line-height: 1.8;       /* Relaxed spacing so text is easy on the eyes */
+    font-size: 1.15rem;     
+    line-height: 1.8;       
     margin-bottom: 1.8rem;
     color: var(--ink);
   }
