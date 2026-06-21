@@ -1,6 +1,8 @@
 ---
 layout: default
 ---
+<link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css)">
+
 <style>
   /* POST LAYOUT CONTAINER */
   .post-content {
@@ -22,26 +24,26 @@ layout: default
     border: 1px solid var(--rule); 
   }
 
-  /* GITHUB STYLE MINIMAL CODE BLOCKS */
-  .post-content pre, 
-  .post-content .highlight {
-    background-color: #f6f8fa !important;  /* GitHub's exact light-gray */
-    border: 1px solid #d0d7de !important;   /* GitHub's subtle gray border */
+  /* FORCED GITHUB STYLE OVERRIDES FOR THE CODE BLOCK CONTAINER */
+  .post-content pre {
+    background-color: #f6f8fa !important;  /* GitHub Gray */
+    border: 1px solid #d0d7de !important;   /* GitHub Border */
     border-radius: 6px !important;
     padding: 16px !important;
     margin: 1.5rem 0 !important;
     overflow-x: auto !important;           
   }
 
-  /* Code font stack matching GitHub */
+  /* Force clean code text typography */
   .post-content code {
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
     font-size: 14px !important;
     line-height: 1.45 !important;
-    color: #24292f !important;             
+    background: transparent !important;
+    padding: 0 !important;
   }
 
-  /* Inline code highlighting inside standard text paragraph lines */
+  /* Inline code highlighting inside paragraphs */
   .post-content p code, 
   .post-content li code {
     background-color: rgba(175, 184, 193, 0.2) !important;
@@ -49,30 +51,8 @@ layout: default
     font-size: 85% !important;
     border-radius: 6px !important;
     color: #24292f !important;
+    font-family: ui-monospace, monospace !important;
   }
-
-  /* ==========================================================================
-     SELF-CONTAINED GITHUB LIGHT SYNTAX COLORS (ROUGE HIGHLIGHTING TOKENS)
-     ========================================================================== */
-  .post-content .highlight .k,  /* Keywords: import, from, def */
-  .post-content .highlight .kn { color: #cf222e !important; font-weight: 600 !important; } 
-  
-  .post-content .highlight .nn, /* Module Names: np, sklearn, datasets */
-  .post-content .highlight .nc { color: #953800 !important; } 
-  
-  .post-content .highlight .s,  /* Strings: 'bwr', 'Scatter Plot...' */
-  .post-content .highlight .s1,
-  .post-content .highlight .s2 { color: #0a3069 !important; } 
-  
-  .post-content .highlight .c1, /* Comments: # Generate a dataset and plot it */
-  .post-content .highlight .c { color: #6e7781 !important; font-style: italic !important; } 
-  
-  .post-content .highlight .m,  /* Numbers: 800, 0.20, 0.30 */
-  .post-content .highlight .mi,
-  .post-content .highlight .mf { color: #0550ae !important; } 
-  
-  .post-content .highlight .nb { color: #953800 !important; } /* Built-ins */
-  .post-content .highlight .o { color: #bc4c00 !important; }  /* Operators (=, :) */
 
   /* TYPOGRAPHY */
   .post-content p { font-size: 1.15rem; line-height: 1.8; margin-bottom: 1.8rem; color: var(--ink); }
@@ -88,3 +68,14 @@ layout: default
 
   {{ content }}
 </div>
+
+<script src="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js)"></script>
+<script src="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js)"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", (event) => {
+    document.querySelectorAll('pre code').forEach((el) => {
+      hljs.highlightElement(el);
+    });
+  });
+</script>
