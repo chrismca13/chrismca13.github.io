@@ -25,7 +25,8 @@ Before getting started you need the following:
 Also assuming this is your first time connecting AWS to your local VS code you'll need to download the AWS CLI interface from here:
 * https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?
 
-![alt text](images/aws-demo/aws-cli.png)
+![alt text](../images/aws-demo/aws-cli.png)
+
 
 ### Setting up your AWS account
 1. Go to https://aws.amazon.com/console/
