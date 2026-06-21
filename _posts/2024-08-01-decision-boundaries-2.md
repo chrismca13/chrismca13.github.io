@@ -27,7 +27,7 @@ Let's tackle the following in this article:
 
 ## Introduction to our Task
 
-![Introduction]({{ '/images/neural-nets/nn-task-intro.png' | relative_url }})
+![Introduction]({{ '/images/neural-nets/nn-task-intro.png' | relative_url }}){: width="70%"}
 
 Our goal is to correctly classify a dataset with two columns where the target variable is either red or blue. In other words, we are trying to guess the color of the dots on the right, given the color of the dots on the left. The data follows a distinctive "moon-shaped" distribution.
 
@@ -59,7 +59,7 @@ Now we're going to try to classify the test dataset using three classical machin
 2. A simple Random Forest Classifier
 3. A more complex Random Forest Classifier
 
-![All Models]({{ '/images/neural-nets/nn-all-three.png' | relative_url }})
+![All Models]({{ '/images/neural-nets/nn-all-three.png' | relative_url }}){: width="70%"}
 
 ### Logistic Regression
 
