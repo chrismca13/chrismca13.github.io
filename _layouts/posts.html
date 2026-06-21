@@ -4,77 +4,40 @@ layout: default
 <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css)">
 
 <style>
-  /* POST LAYOUT CONTAINER */
-  .post-content {
-    max-width: 740px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 6rem 1.5rem;
-    box-sizing: border-box;
-  }
-
-  /* GLOBAL DEFAULT BLOG IMAGE CONSTRAINTS */
-  .post-content img {
-    max-width: 550px !important;
-    width: 100%;
-    height: auto !important;
-    display: block;        
-    margin: 2.5rem auto !important;
-    border-radius: 6px;    
-    border: 1px solid var(--rule); 
-  }
-
-  /* FORCED GITHUB STYLE OVERRIDES FOR THE CODE BLOCK CONTAINER */
-  .post-content pre {
-    background-color: #f6f8fa !important;  /* GitHub Gray */
-    border: 1px solid #d0d7de !important;   /* GitHub Border */
+  /* Target the exact wrapper Jekyll outputs for code blocks */
+  div.highlighter-rouge,
+  figure.highlight,
+  pre.highlight {
+    background-color: #f6f8fa !important;
+    border: 1px solid #d0d7de !important;
     border-radius: 6px !important;
     padding: 16px !important;
     margin: 1.5rem 0 !important;
-    overflow-x: auto !important;           
+    display: block !important;
   }
 
-  /* Force clean code text typography */
-  .post-content code {
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
+  /* Force the text inside to look like modern code */
+  div.highlighter-rouge pre,
+  div.highlighter-rouge code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace !important;
     font-size: 14px !important;
     line-height: 1.45 !important;
-    background: transparent !important;
-    padding: 0 !important;
-  }
-
-  /* Inline code highlighting inside paragraphs */
-  .post-content p code, 
-  .post-content li code {
-    background-color: rgba(175, 184, 193, 0.2) !important;
-    padding: 0.2em 0.4em !important;
-    font-size: 85% !important;
-    border-radius: 6px !important;
     color: #24292f !important;
-    font-family: ui-monospace, monospace !important;
+    background: transparent !important;
   }
-
-  /* TYPOGRAPHY */
-  .post-content p { font-size: 1.15rem; line-height: 1.8; margin-bottom: 1.8rem; color: var(--ink); }
-  .post-content h1, .post-content h2, .post-content h3 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 600; margin-top: 3rem; margin-bottom: 1rem; }
-  .post-content h1 { font-size: 2.4rem; }
-  .post-content h2 { font-size: 1.9rem; }
 </style>
 
-<div class="post-content">
-  <div class="back-btn-container">
-    <a href="/" class="back-btn">← Back to Portfolio</a>
-  </div>
-
+<div style="max-width: 740px; margin: 0 auto; padding: 2rem 1rem;">
+  <a href="/">&larr; Back</a>
+  
   {{ content }}
 </div>
 
 <script src="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js)"></script>
 <script src="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js)"></script>
-
 <script>
-  document.addEventListener("DOMContentLoaded", (event) => {
-    document.querySelectorAll('pre code').forEach((el) => {
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('pre').forEach((el) => {
       hljs.highlightElement(el);
     });
   });
