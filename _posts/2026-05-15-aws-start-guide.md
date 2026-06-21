@@ -52,8 +52,8 @@ import pandas as pd
 # Read data from S3
 df = pd.read_csv("s3://umich-capstone-project/data.csv")
 ```
-
-## SIADS 699 - Module 0: Is using AWS worth the effort? {: #module-0}
+<a id="module-0"></a>
+## SIADS 699 - Module 0: Is using AWS worth the effort?
 
 ### What is AWS?
 
@@ -167,7 +167,8 @@ clf = pickle.load(model_buffer)
 Being comfortable in the cloud is a good skill for any data scientist - if nothing else this is a great reason to use AWS in your project workflow. If this feels worth it to you, head to [the second module](https://github.com/chrismca13/aws-demo/tree/main/1_setting_up_the_aws_account)!
 
 
-## SIADS 699 - Module 1: Download Setting up the Root User {: #module-1}
+<a id="module-1"></a>
+## SIADS 699 - Module 1: Download Setting up the Root User
 One person on the team will be the "Root User." This person's responsibilites will include:
 * Setting up the team's AWS accounts.
 * Maintaining responsibility for billing (ie you will supply your own credit card)
@@ -205,8 +206,8 @@ In the [next module](https://github.com/chrismca13/aws-demo/tree/main/2_setting_
 * Tell you how to set up an `admin` role for you to work from.
 * Talk through how to set up roles with limited access for your teammates.
 
-
-## SIADS 699 - Module 2: Setting up Admin Access {: #module-2}
+<a id="module-2"></a>
+## SIADS 699 - Module 2: Setting up Admin Access
 Now that the Root User role is set up, you can create an admin role for you to work out of. 
 
 ### Setting up an Admin Role
@@ -242,8 +243,8 @@ It's a best practice to stay out of the root user role when possible. The first 
 
 [In the next module](https://github.com/chrismca13/aws-demo/tree/main/3_setting_team_accounts), we'll cover how to get access to S3 for you and your team so you all can easily save and share dataset. 
 
-
-## SIADS 699 - Module 3: Setting up your Team's Accounts {: #module-3}
+<a id="module-3"></a>
+## SIADS 699 - Module 3: Setting up your Team's Accounts
 Now that you have your admin role ready we're going to create accounts for you and your team. 
 
 ### Setting up your team's access group.
@@ -302,8 +303,8 @@ Now that you have your admin role ready we're going to create accounts for you a
 [In the final module](https://github.com/chrismca13/aws-demo/tree/main/4_accessing_S3_from_VS_code) we'll show you how to use these credentials to connect to AWS in your local VS Code environment. 
 
 
-
-## SIADS 699 - Module 4: Using S3 from VS Code {: #module-4}
+<a id="module-4"></a>
+## SIADS 699 - Module 4: Using S3 from VS Code
 Now that your roles are created and you gave your team access to S3, you can read share datasets from local VS code!
 
 ### Logging in to AWS from VS Code
@@ -358,8 +359,8 @@ If this was interesting to you at all and you'd like to know more about the clou
 
 The `Certificed Cloud Practioner` --> `AWS Certified Machine Learning Engineer` --> `Certified Data Engineer` is a great path to focus on after you complete the MADS program. Good luck!
 
-
-## Optional: Setting up Spend Alerts {: #module-5}
+<a id="module-5"></a>
+## Optional: Setting up Spend Alerts
 Now that you've got your team set up, you've tested the connection, and everything is working it's time to take some steps to reduce the likelihood of you getting a huge AWS bill. 
 
 Like we said before, AWS is not required for this course and your instructors, the University of Michigan, and the MADS program are NOT responsible for any bills you rack up in AWS. 
