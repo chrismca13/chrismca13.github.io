@@ -13,7 +13,7 @@ layout: default
 
   /* GLOBAL DEFAULT BLOG IMAGE CONSTRAINTS */
   .post-content img {
-    max-width: 550px !important; /* Scaled down default maximum width (instead of a massive 740px) */
+    max-width: 550px !important; /* Scaled down default maximum width */
     width: 100%;                 /* Fluid on mobile */
     height: auto !important;     /* Maintains correct aspect ratio */
     display: block;        
@@ -22,7 +22,7 @@ layout: default
     border: 1px solid var(--rule); 
   }
 
-  /* IMAGE UTILITY CLASSES (Use these in Markdown to make specific images smaller) */
+  /* IMAGE UTILITY CLASSES */
   .post-content img.img-small {
     max-width: 350px !important;
   }
@@ -35,7 +35,7 @@ layout: default
     max-width: 100% !important; /* Expands to full 740px column width if needed */
   }
 
-  /* Style image captions (written as *Italics* directly underneath an image) */
+  /* Style image captions */
   .post-content img + em {
     display: block;
     text-align: center;
@@ -44,6 +44,34 @@ layout: default
     color: var(--ink-muted);
     margin-top: -1.5rem;
     margin-bottom: 2.5rem;
+  }
+
+  /* GITHUB-STYLE CODE BLOCKS */
+  .post-content pre {
+    background-color: #f6f8fa !important;  /* GitHub's light-mode code background */
+    border: 1px solid #d0d7de !important;   /* GitHub's light-mode code border */
+    border-radius: 6px !important;          /* Rounded corners */
+    padding: 16px !important;               /* Inner spacing */
+    overflow-x: auto !important;            /* Responsive horizontal scroll */
+    margin-bottom: 1.5rem !important;       /* Space below block */
+    font-size: 14.5px !important;           /* Readable font scale */
+    line-height: 1.45 !important;           /* Comfortable line spacing */
+  }
+
+  /* Code font stack matching GitHub */
+  .post-content code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace !important;
+    font-size: 85% !important;
+  }
+
+  /* Inline code highlighting (e.g. `code` inside paragraphs) */
+  .post-content p code, 
+  .post-content li code {
+    background-color: rgba(175, 184, 193, 0.2) !important; /* Translucent grey background */
+    padding: 0.2em 0.4em !important;
+    margin: 0 !important;
+    font-size: 85% !important;
+    border-radius: 6px !important;
   }
 
   /* TYPOGRAPHY ADJUSTMENTS FOR READABILITY */
