@@ -4,6 +4,10 @@ title: "AWS Demo: Getting Started in the Cloud"
 description: "A step-by-step guide of MLOps basics in cloud infrastructure"
 ---
 
+**May 15, 2026**  
+**Category:** AWS  
+**Reading Time:** 45 minute setup
+
 ## SIADS 699: Getting Started in the Cloud
 
 One challenge a lot of teams encounter in their capstone project is sharing data. In the past we've seen teams send CSVs via slack, upload massive files to git, and some store their data in Google Drive. 
