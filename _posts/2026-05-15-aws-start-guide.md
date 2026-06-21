@@ -234,7 +234,7 @@ It's a best practice to stay out of the root user role when possible. The first 
 1. Click on `Users` in the side bar on the left.
 2. You should see your newly created role.
 3. Click on the role, navigate to the Security Credentials tab, and click the Enable Console Access button:
-![alt text]({{ '../images/aws-demo/console_access.png' | relative_url }}){: width="400"}
+![alt text]({{ '../images/aws-demo/console_access.png' | relative_url }}){: width="70%"}
 4. Click the orange Enable Console Access button. This generates your user name and one time password. Save it and don't lose it. Click the `Download .csv file` to be safe. 
 5. Copy the `Console sign-in link URL` and paste it into your browser. As the admin of the project you'll be using this role throughout the project. **Favorite this link so you can easily get back to the log in**
 6. Sign in with your username and password (that you hopefully downloaded) and you're in!
