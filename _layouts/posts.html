@@ -30,7 +30,7 @@ layout: default
     border-radius: 6px !important;
     padding: 16px !important;
     margin: 1.5rem 0 !important;
-    overflow-x: auto !important;           /* Allows horizontal scrolling */
+    overflow-x: auto !important;           
   }
 
   /* Code font stack matching GitHub */
@@ -38,7 +38,7 @@ layout: default
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
     font-size: 14px !important;
     line-height: 1.45 !important;
-    color: #24292f !important;             /* Base code text color */
+    color: #24292f !important;             
   }
 
   /* Inline code highlighting inside standard text paragraph lines */
@@ -50,6 +50,29 @@ layout: default
     border-radius: 6px !important;
     color: #24292f !important;
   }
+
+  /* ==========================================================================
+     SELF-CONTAINED GITHUB LIGHT SYNTAX COLORS (ROUGE HIGHLIGHTING TOKENS)
+     ========================================================================== */
+  .post-content .highlight .k,  /* Keywords: import, from, def */
+  .post-content .highlight .kn { color: #cf222e !important; font-weight: 600 !important; } 
+  
+  .post-content .highlight .nn, /* Module Names: np, sklearn, datasets */
+  .post-content .highlight .nc { color: #953800 !important; } 
+  
+  .post-content .highlight .s,  /* Strings: 'bwr', 'Scatter Plot...' */
+  .post-content .highlight .s1,
+  .post-content .highlight .s2 { color: #0a3069 !important; } 
+  
+  .post-content .highlight .c1, /* Comments: # Generate a dataset and plot it */
+  .post-content .highlight .c { color: #6e7781 !important; font-style: italic !important; } 
+  
+  .post-content .highlight .m,  /* Numbers: 800, 0.20, 0.30 */
+  .post-content .highlight .mi,
+  .post-content .highlight .mf { color: #0550ae !important; } 
+  
+  .post-content .highlight .nb { color: #953800 !important; } /* Built-ins */
+  .post-content .highlight .o { color: #bc4c00 !important; }  /* Operators (=, :) */
 
   /* TYPOGRAPHY */
   .post-content p { font-size: 1.15rem; line-height: 1.8; margin-bottom: 1.8rem; color: var(--ink); }
