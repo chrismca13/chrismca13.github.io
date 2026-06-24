@@ -276,7 +276,7 @@ layout: null
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    aspect-ratio: 1 / 1;                 /* Forces perfect square layout */
+    aspect-ratio: 1 / 0.7;               /* 1:1 would be a square */
     background: var(--paper-card);       /* Inherits your white paper token */
     border: 1px solid var(--rule);       /* Inherits your native borders */
     padding: 2rem;
@@ -343,14 +343,51 @@ layout: null
     text-transform: uppercase;
   }
 
+  /* ==========================================================================
+     COLORFUL SKILL TAG / CHIP SYSTEM
+     ========================================================================== */
+  
+  /* Shared tag properties for crisp text */
   .blog-category {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
+    font-weight: 600;
     letter-spacing: 0.05em;
-    color: var(--ink-muted);
-    background: var(--tag-bg);
-    padding: 2px 6px;
-    border-radius: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* MLOps: Vibrant Sage Green */
+  .skill-tag-mlops {
+    background-color: #e2f4e8 !important;
+    color: #1b6635 !important;
+  }
+
+  /* AWS: Soft Technical Orange */
+  .skill-tag-aws {
+    background-color: #ffeeda !important;
+    color: #b35900 !important;
+  }
+
+  /* Machine Learning: Smooth Slate Blue */
+  .skill-tag-machine-learning {
+    background-color: #e1f0ff !important;
+    color: #0b509c !important;
+  }
+
+  /* Deep Learning / AI: Editorial Purple */
+  .skill-tag-deep-learning,
+  .skill-tag-ai {
+    background-color: #f3ebfa !important;
+    color: #6120a1 !important;
+  }
+
+  /* Python / Engineering: Minimal Warm Gray (Fallback) */
+  .skill-tag-python {
+    background-color: #f1ebd9 !important;
+    color: #634d11 !important;
   }
 
   .blog-title {
@@ -598,15 +635,13 @@ layout: null
           <span class="project-arrow">{% if post.external_url %}↗{% else %}→{% endif %}</span>
         </div>
 
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="blog-date">{{ post.date | date: "%B %Y" }}</span>
-            {% for category in post.categories %}
-            <span class="blog-category">{{ category }}</span>
-            {% endfor %}
-          </div>
-          <p class="blog-title">{{ post.title }}</p>
-          <p class="blog-excerpt">{{ post.description }}</p>
+        <div class="blog-meta">
+          <span class="blog-date">{{ post.date | date: "%B %Y" }}</span>
+          
+          {% for category in post.categories %}
+            {% assign skill_class = category | slugify %}
+            <span class="blog-category skill-tag-{{ skill_class }}">{{ category }}</span>
+          {% endfor %}
         </div>
 
         {% if post.reading_time %}

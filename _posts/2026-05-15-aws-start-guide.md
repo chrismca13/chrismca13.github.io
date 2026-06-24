@@ -2,6 +2,7 @@
 layout: post
 title: "AWS Demo: Getting Started in the Cloud"
 description: "A step-by-step guide of MLOps basics in cloud infrastructure"
+categories: [MLOps, AWS]
 ---
 
 **May 15, 2026**  
