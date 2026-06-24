@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Visualizing Classification Decision Boundaries"
-description: "A deep dive into hyperplanes, kernel tricks, and optimization using Scikit-Learn."
+description: "Trees, Neural Nets, and Linear Regression: Exploring Decision Boundaries Visually."
 categories: [Machine Learning, Deep Learning]
 ---
 
