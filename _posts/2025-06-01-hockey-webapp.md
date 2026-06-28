@@ -2,7 +2,7 @@
 layout: post
 title: "Hockey Stats Web Application"
 description: "Using GitHub Actions, S3, and Python to create a weekly refresh of career hockey stats for my team going back up to 15 years."
-date: 2026-06-27
+date: 2025-06-01
 categories: [AWS, Data Engineering]
 ---
 
@@ -10,7 +10,7 @@ I recently built and deployed a web application designed to track and visualize 
 
 Try it out by doing a search for "McAllister" in the panel on the left!
 
-[https://oakhockey.streamlit.app/]
+[https://oakhockey.streamlit.app/](https://oakhockey.streamlit.app/)
 
 <div style="width: 100%; overflow: hidden; border: 1px solid var(--rule); border-radius: 4px; margin: 1.5rem 0;">
   <iframe 
