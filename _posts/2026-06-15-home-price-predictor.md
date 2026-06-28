@@ -3,7 +3,7 @@ layout: post
 title: "Deployed, Low Latency ML Model"
 description: "Shipping a production grade ML Model using AWS infrastructure, served via API Gateway, and accessed through a static frontend website hosted on Amazon S3."
 date: 2026-06-27
-categories: [AWS, MLOps]
+categories: [MLOps, AWS]
 ---
 
 # Serverless Home Price Predictor
