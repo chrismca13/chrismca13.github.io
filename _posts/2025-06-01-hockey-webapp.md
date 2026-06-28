@@ -6,14 +6,16 @@ date: 2026-06-27
 categories: [AWS, Data Engineering]
 ---
 
-I recently built and deployed a web application designed to track and visualize hockey stats for my team going back 15+ years:
+I recently built and deployed a web application designed to track and visualize hockey stats for my team going back 15+ years.
 
-https://oakhockey.streamlit.app/
+Try it out by doing a search for "McAllister" in the panel on the left!
+
+[https://oakhockey.streamlit.app/]
 
 <div style="width: 100%; overflow: hidden; border: 1px solid var(--rule); border-radius: 4px; margin: 1.5rem 0;">
   <iframe 
     src="https://oakhockey.streamlit.app/?embed=true"
-    style="width: 125%; height: 750px; transform: scale(0.8); transform-origin: 0 0; border: none;"
+    style="width: 125%; height: 750px; transform: scale(0.7); transform-origin: 0 0; border: none;"
     allow="fullscreen">
   </iframe>
 </div>
