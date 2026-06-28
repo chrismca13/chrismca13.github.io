@@ -224,9 +224,9 @@ layout: null
 
   /* ABOUT */
   #about {
-  padding-top: 3rem;    
-  padding-bottom: 2rem; 
-  margin-top: 0;        
+    padding-top: 3rem;    
+    padding-bottom: 2rem; 
+    margin-top: 0;        
   }
   .about-grid {
     display: grid;
@@ -260,13 +260,12 @@ layout: null
     text-transform: uppercase;
   }
 
-/* ==========================================================================
+  /* ==========================================================================
      PROJECTS & WRITING SQUARE GRID
      ========================================================================== */
-  
   .projects-square-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 Columns on desktop */
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     width: 100%;
     margin-top: 2rem;
@@ -276,9 +275,9 @@ layout: null
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    aspect-ratio: 1 / 0.7;               /* 1:1 would be a square */
-    background: var(--paper-card);       /* Inherits your white paper token */
-    border: 1px solid var(--rule);       /* Inherits your native borders */
+    aspect-ratio: 1 / 0.7;               
+    background: var(--paper-card);       
+    border: 1px solid var(--rule);       
     padding: 2rem;
     text-decoration: none !important;
     color: var(--ink);
@@ -291,7 +290,6 @@ layout: null
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   }
 
-  /* INNER CARD COMPONENTS */
   .card-top {
     display: flex;
     justify-content: space-between;
@@ -323,7 +321,7 @@ layout: null
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centers title & excerpt inside the square */
+    justify-content: center; 
     margin: 1rem 0;
   }
 
@@ -346,8 +344,6 @@ layout: null
   /* ==========================================================================
      COLORFUL SKILL TAG / CHIP SYSTEM
      ========================================================================== */
-  
-  /* Shared tag properties for crisp text */
   .blog-category {
     font-family: var(--mono);
     font-size: 10px;
@@ -358,6 +354,7 @@ layout: null
     border-radius: 4px;
     display: inline-block;
   }
+
 
   /* MLOps: Vibrant Sage Green */
   .skill-tag-mlops {
@@ -389,7 +386,6 @@ layout: null
     background-color: #f1ebd9 !important;
     color: #634d11 !important;
   }
-
   .blog-title {
     font-family: var(--news);
     font-size: 1.35rem;
@@ -399,9 +395,7 @@ layout: null
     line-height: 1.25;
   }
 
-  .project-square-card:hover .blog-title {
-    color: var(--accent);
-  }
+  .project-square-card:hover .blog-title { color: var(--accent); }
 
   .blog-excerpt {
     font-family: var(--serif);
@@ -409,7 +403,6 @@ layout: null
     color: var(--ink-muted);
     line-height: 1.5;
     margin: 0;
-    /* Clean text clamp so long sentences don't push outside the square boundary */
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -474,8 +467,7 @@ layout: null
     font-size: 1rem;
     color: var(--ink-muted);
     line-height: 1.8;
-  }
-  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  }  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
   .contact-link {
     display: flex;
     align-items: center;
@@ -489,30 +481,53 @@ layout: null
   }
   .contact-link:hover { border-color: var(--ink-muted); background: var(--paper-warm); }
   .contact-link-label {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.05em;
-    color: var(--ink-muted);
-    text-transform: uppercase;
-  }
-  .contact-link-value {
-    font-size: 0.95rem;
-    color: var(--ink);
-  }
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+    .contact-link-value { font-size: 0.95rem; color: var(--ink); }
   .contact-link-arrow { color: var(--ink-faint); font-size: 0.9rem; }
 
   /* FOOTER */
-  footer {
-    border-top: 1px solid var(--rule);
-    padding: 2rem;
-    text-align: center;
-  }
-  footer p {
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem;
+      text-align: center;
+    }  
+    footer p { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-faint); text-transform: uppercase; }
+
+  /* ==========================================================================
+     MARKDOWN CODE BLOCKS & HIGHLIGHTING
+     ========================================================================== */
+  pre, code, .highlight, pre code {
     font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--ink-faint);
-    text-transform: uppercase;
+    font-size: 14px;
+    direction: ltr;
+    text-align: left;
+    white-space: pre !important; 
+    word-spacing: normal;
+    word-break: normal;
+    tab-size: 4;
+  }
+  pre {
+    background: var(--paper-warm); 
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;             
+    display: block;               
+    width: 100%;
+  }
+  p code, li code {
+    background: var(--tag-bg);
+    color: var(--ink);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 14px;
+    white-space: nowrap !important; 
   }
 
   /* ANIMATIONS */
@@ -526,7 +541,7 @@ layout: null
   .delay-3 { animation-delay: 0.34s; }
   .delay-4 { animation-delay: 0.46s; }
 
-/* RESPONSIVE */
+  /* RESPONSIVE */
   @media (max-width: 640px) {
     #hero { grid-template-columns: 1fr; }
     .hero-badge { display: none; }
@@ -535,16 +550,8 @@ layout: null
     .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
     h1 { font-size: 2.4rem; }
 
-    /* New Grid Mobile Fallbacks */
-    .projects-square-grid {
-      grid-template-columns: 1fr; /* Drop to 1 single column on phones */
-      gap: 1rem;
-    }
-    .project-square-card {
-      aspect-ratio: auto;        /* Allow squares to expand vertically so text never spills out */
-      min-height: 260px;
-      padding: 1.5rem;
-    }
+    .projects-square-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .project-square-card { aspect-ratio: auto; min-height: 260px; padding: 1.5rem; }
   }
 </style>
 </head>
