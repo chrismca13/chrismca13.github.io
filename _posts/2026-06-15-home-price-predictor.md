@@ -18,15 +18,9 @@ The model is not intended to be particularly accurate (although predictions do s
 
 [Front End - Home Price Predictor](http://homeprice-final-api-webpagebucket-fzofzswlrjkl.s3-website.us-east-2.amazonaws.com/)
 
-
-<div style="width: 100%; overflow: hidden; border: 1px solid var(--rule); border-radius: 4px; margin: 1.5rem 0;">
-  <iframe 
-    src="http://homeprice-final-api-webpagebucket-fzofzswlrjkl.s3-website.us-east-2.amazonaws.com/?embed=true"
-    style="width: 125%; height: 750px; transform: scale(0.9); transform-origin: 0 0; border: none;"
-    allow="fullscreen">
-  </iframe>
-</div>
-
+<a href="http://homeprice-final-api-webpagebucket-fzofzswlrjkl.s3-website.us-east-2.amazonaws.com/" target="_blank">
+  <img width="515" height="452" alt="Home Price Predictor App" src="assets/home-price-app.png" style="border: 1px solid #e1e4e6; border-radius: 8px;" />
+</a>
 
 ---
 
