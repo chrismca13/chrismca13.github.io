@@ -3,14 +3,12 @@ layout: post
 title: "Building the Oak Hockey Web Application"
 description: "A deep dive into the architecture, data pipeline, and interactive components behind my latest hockey tracking application."
 date: 2026-06-27
-categories: [Python, Machine Learning]
+categories: [AWS, Data Engineering]
 ---
 
-I recently built and deployed a web application designed to track and visualize hockey stats for my team. 
+I recently built and deployed a web application designed to track and visualize hockey stats for my team going back 15+ years:
 
-### Motivation
-Our hockey team's website only tracked our stats one season at a time, but we wanted to know who the all time leading scorer was. 
-You can interact with the live application directly below!
+https://oakhockey.streamlit.app/
 
 <iframe 
     src="https://oakhockey.streamlit.app/?embed=true"
@@ -18,5 +16,11 @@ You can interact with the live application directly below!
     allow="fullscreen">
   iframe>
 
+### Motivation
+Our hockey team's website only tracked our stats one season at a time, but we wanted to know who the all time leading scorer was. 
+
 ### Project Overview
-Write your project background notes, challenges, or thoughts here. You can even include some of your Python snippets now that your code block wrappers are all set up!
+We use a combination of GitHub Actions, Python, and S3 / AWS to automatically update the stats 3 times a week. 
+Checkout my GitHub for a complete overview of the technical process:
+
+https://github.com/chrismca13/oakland-hockey-stats
