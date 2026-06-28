@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Hockey Stats Web Application"
-description: "Using GitHub Actions, S3, and Python to create a weekly refresh of career hockey stats for my team."
+description: "Using GitHub Actions, S3, and Python to create a weekly refresh of career hockey stats for my team going back up to 15 years."
 date: 2026-06-27
 categories: [AWS, Data Engineering]
 ---
