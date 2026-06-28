@@ -47,6 +47,8 @@ https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/
 
 ## Repository Structure
 
+[GitHub](https://github.com/chrismca13/home-price-model)
+
 ```text
 ├── Dockerfile
 ├── README.md
