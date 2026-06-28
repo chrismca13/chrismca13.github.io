@@ -19,9 +19,11 @@ https://oakhockey.streamlit.app/
 </div>
 
 ### Motivation
+
 Our hockey team's website only tracked our stats one season at a time, but we wanted to know who the all time leading scorer was. 
 
 ### Project Overview
+
 We use a combination of GitHub Actions, Python, and S3 / AWS to automatically update the stats 3 times a week. 
 Checkout my GitHub for a complete overview of the technical process:
 
