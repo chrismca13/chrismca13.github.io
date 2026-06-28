@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Building the Oak Hockey Web Application"
-description: "A deep dive into the architecture, data pipeline, and interactive components behind my latest hockey tracking application."
+title: "Hockey Stats Web Application"
+description: "Using GitHub Actions, S3, and Python to create a weekly refresh of career hockey stats for my team."
 date: 2026-06-27
 categories: [AWS, Data Engineering]
 ---
