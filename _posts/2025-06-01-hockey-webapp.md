@@ -25,7 +25,7 @@ Our hockey team's website only tracked our stats one season at a time, but we wa
 ### Project Overview
 
 We use a combination of GitHub Actions, Python, and S3 / AWS to automatically update the stats 3 times a week. 
-Checkout my GitHub for a complete overview of the technical process:
+Checkout my [GitHub](https://github.com/chrismca13/oakland-hockey-stats) for a complete overview of the technical process!
 
-https://github.com/chrismca13/oakland-hockey-stats
+
 
