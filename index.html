@@ -530,6 +530,61 @@ layout: null
     white-space: nowrap !important; 
   }
 
+/* ==========================================================================
+     MARKDOWN CODE BLOCKS & HIGHLIGHTING (AGGRESSIVE RESET)
+     ========================================================================== */
+  
+  /* Targets Jekyll wrappers, Rouge syntax blocks, and core code elements */
+  pre, 
+  code, 
+  kbd, 
+  samp,
+  .highlight,
+  .highlight pre,
+  .highlighter-rouge pre,
+  div[class*="language-"] pre {
+    font-family: var(--mono) !important;
+    font-size: 14px !important;
+    direction: ltr !important;
+    text-align: left !important;
+    
+    /* THE CORE FIX: Absolutely forces spaces and line breaks to preserve formatting */
+    white-space: pre !important; 
+    word-spacing: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    tab-size: 4 !important;
+  }
+
+  /* Structural configuration for block-level wrapper components */
+  pre,
+  .highlight,
+  .highlighter-rouge,
+  div[class*="language-"] {
+    background: var(--paper-warm) !important; 
+    border: 1px solid var(--rule) !important;
+    border-radius: 4px !important;
+    padding: 1.25rem !important;
+    margin: 1.5rem 0 !important;
+    overflow-x: auto !important;             
+    display: block !important;               
+    width: 100% !important;
+    clear: both !important;
+  }
+
+  /* Inline code formatting tags like `np.array()` written inside sentences */
+  p code, 
+  li code,
+  td code {
+    background: var(--tag-bg) !important;
+    color: var(--ink) !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-size: 14px !important;
+    white-space: nowrap !important; /* Keeps inline tags from snapping onto separate lines */
+    display: inline !important;
+  }
+
   /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
