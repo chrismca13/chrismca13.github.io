@@ -32,6 +32,7 @@ After your complete the steps above, your team will be able to write and read fr
 
 
 * Saving a dataframe to the cloud:
+
 ```python
 import pandas as pd
 import numpy as np
@@ -51,6 +52,7 @@ df.to_csv("s3://umich-capstone-project/data.csv", index=False)
 ```
 
 * Reading data from the cloud:
+
 ```python
 import pandas as pd
 
@@ -349,6 +351,7 @@ df.to_csv("s3://umich-capstone-project/data.csv", index=False)
 ```
 
 * After your team gets access, try running this code:
+
 ```python
 import pandas as pd
 
