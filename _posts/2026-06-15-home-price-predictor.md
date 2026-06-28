@@ -19,7 +19,7 @@ The model is not intended to be particularly accurate (although predictions do s
 [Front End - Home Price Predictor](http://homeprice-final-api-webpagebucket-fzofzswlrjkl.s3-website.us-east-2.amazonaws.com/)
 
 <a href="http://homeprice-final-api-webpagebucket-fzofzswlrjkl.s3-website.us-east-2.amazonaws.com/" target="_blank">
-  <img width="515" height="452" alt="Home Price Predictor App" src="assets/home-price-app.png" style="border: 1px solid #e1e4e6; border-radius: 8px;" />
+  <img width="515" height="452" alt="Home Price Predictor App" src="/assets/home-price-app.png" style="border: 1px solid #e1e4e6; border-radius: 8px;" />
 </a>
 
 ---
