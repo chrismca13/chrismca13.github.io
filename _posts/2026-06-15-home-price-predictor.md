@@ -35,7 +35,7 @@ The application utilizes a fully serverless, highly scalable infrastructure mana
 
 ## Model and Data
 * Data Source
-https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/data?select=train.csv
+[Kaggle](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/data?select=train.csv)
 
 ---
 
